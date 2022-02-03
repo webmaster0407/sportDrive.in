@@ -173,7 +173,7 @@ class SearchController extends Controller
             ->where([["parent_id", $catID], ["is_active", "Y"]])
             ->get();
         $category = $category->each(function ($item, $key) {
-            if (count($item) > 0 && $item != null) {
+            if (is_array($item) && count($item) > 0 && $item != null) {
                 $category[$key]= $item;
             }
         });
