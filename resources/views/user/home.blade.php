@@ -1,5 +1,16 @@
 @extends('layouts.home')
 @section('content')
+<style type="text/css">
+    .pr_flash {
+        background-color: transparent;
+        padding: 0;
+    }
+    .pr_flash > img {
+        width: 30% !important;
+        height: auto;
+    }
+</style>
+
 <!-- START SECTION BANNER -->
 <div class="banner_section full_screen staggered-animation-wrap">
     <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow carousel_style2" data-ride="carousel">
@@ -11,24 +22,24 @@
                     @if(file_exists(public_path().$ds."uploads"."$ds"."banners"."$ds"."1280x404"."$ds"."$banner->banner_images"))
                             @if($i == 1) 
                             <?php $i++; ?>
-            <div class="carousel-item active background_bg overlay_bg_50" data-img-src="'uploads/banners/1280x404/{{$banner->banner_images}}'">
+                                <div class="carousel-item active background_bg overlay_bg_50" data-img-src="{{ asset('uploads/banners/1280x404').'/'.$banner->banner_images}}">
                             @else
-            <div class="carousel-item background_bg overlay_bg_50" data-img-src="'uploads/banners/1280x404/{{$banner->banner_images}}'">
+                                <div class="carousel-item background_bg overlay_bg_50" data-img-src="{{ asset('uploads/banners/1280x404').'/'.$banner->banner_images}}">
                             @endif
-                <div class="banner_slide_content banner_content_inner">
-                	<div class="container">
-                    	<div class="row justify-content-center">
-                            <div class="col-lg-7 col-md-10">
-                                <div class="banner_content text-center">
-                                    <p class="text_white staggered-animation" data-animation="fadeInUp" data-animation-delay="0.4s">{{$banner->short_text}}</p>
-                                    <h2 class="text_white staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">{{$banner->banner_heading}}</h2>
-                                    <a class="btn btn-white staggered-animation" href="{{$banner->banner_url}}" data-animation="fadeInUp" data-animation-delay="0.5s">Shop Now</a>
+                                    <div class="banner_slide_content banner_content_inner">
+                                    	<div class="container">
+                                        	<div class="row justify-content-center">
+                                                <div class="col-lg-7 col-md-10">
+                                                    <div class="banner_content text-center">
+                                                        <p class="text_white staggered-animation" data-animation="fadeInUp" data-animation-delay="0.4s" style="color: #fff;">{{$banner->short_text}}</p>
+                                                        <h2 class="text_white staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s" style="color: #fff;">{{$banner->banner_heading}}</h2>
+                                                        <a class="btn btn-white staggered-animation" href="{{$banner->banner_url}}" data-animation="fadeInUp" data-animation-delay="0.5s">Shop Now</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
                     @endif
                 @endforeach
             @endif
