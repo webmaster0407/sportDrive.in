@@ -1,0 +1,17 @@
+header .product_search_form.radius_input {
+    overflow: inherit;
+    position: relative;
+}
+.product_search_form.radius_input #searchList {
+    position: absolute;
+    border: 1px solid #ced4da;
+    z-index: 9999;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background-color: white;
+    overflow-y: auto;
+}
+#searchList .autoList li {
+    
+}
