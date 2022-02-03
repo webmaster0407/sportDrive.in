@@ -22,9 +22,9 @@
                     @if(file_exists(public_path().$ds."uploads"."$ds"."banners"."$ds"."1280x404"."$ds"."$banner->banner_images"))
                             @if($i == 1) 
                             <?php $i++; ?>
-                                <div class="carousel-item active background_bg overlay_bg_50" data-img-src="{{ asset('uploads/banners/1280x404').'/'.$banner->banner_images}}">
+                                <div class="carousel-item active background_bg overlay_bg_50" data-img-src="'{{ asset('uploads/banners/1280x404').'/'.$banner->banner_images}}'">
                             @else
-                                <div class="carousel-item background_bg overlay_bg_50" data-img-src="{{ asset('uploads/banners/1280x404').'/'.$banner->banner_images}}">
+                                <div class="carousel-item background_bg overlay_bg_50" data-img-src="'{{ asset('uploads/banners/1280x404').'/'.$banner->banner_images}}'">
                             @endif
                                     <div class="banner_slide_content banner_content_inner">
                                     	<div class="container">
