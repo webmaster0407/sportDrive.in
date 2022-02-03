@@ -1,10 +1,32 @@
+
 header .product_search_form.radius_input {
     overflow: inherit;
-    position: relative;
 }
 .product_search_form.radius_input #searchList {
+    width: 100%;
+}
+.product_search_form.radius_input #searchList > p {
+    border: 1px solid #ced4da;
+    border-top: 0;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 9999;
+}
+.product_search_form.radius_input #searchList > span {
+    position: absolute;
+    top: -35px;
+    right: 130px;
+    z-index: 9999;
+}
+.product_search_form.radius_input #searchList .autoList {
     position: absolute;
     border: 1px solid #ced4da;
+    border-top: 0;
     z-index: 9999;
     left: 0;
     right: 0;
@@ -13,5 +35,15 @@ header .product_search_form.radius_input {
     overflow-y: auto;
 }
 #searchList .autoList li {
-    
+    padding: 8px 10px;
+    border-bottom: 1px solid #ced4da;
+    display: flex;
+}
+#searchList .autoList .name-price span {
+    display: block;
+}
+@media (min-width: 992px) {
+    header .product_search_form.radius_input {
+        position: relative;
+    }
 }

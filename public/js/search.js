@@ -3,11 +3,11 @@ var typingTimer;                //timer identifier
 var doneTypingInterval = 750;  //time in ms (5 seconds)
 
 //on keyup, start the countdown
-$('#searchKeyword').keyup(function () {
+$('#searchKeyword').on('keyup', function () {
     var str = $(this).val();
     var strlen = str.length;
     if(strlen == "0")//if no keyword is there then hide the poup
-        suggestList.hide();
+        $("#searchList").hide();
     if(strlen > 2){//minimum length should be 3 to search
         clearTimeout(typingTimer);
         if ($('#searchKeyword').val()) {
@@ -27,13 +27,15 @@ function doneTyping () {
         type: "get",
         url: "/search?keyword="+str+"&cat="+cat,
         success: function (data) {
-            console.log(data);
             suggestList.html(data);
             suggestList.show();
         }
     });
 }
 
-$(document).on("click", '#close-search-box', function() {
+$(document).on("click", '#close-search-box', function(e) {
     $("#searchList").hide();
+    $("#searchKeyword").val('');
+    $("#searchKeyword").trigger('focus');
+    e.preventDefault();
 });
