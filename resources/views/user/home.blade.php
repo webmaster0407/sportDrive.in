@@ -1,74 +1,36 @@
 @extends('layouts.home')
 @section('content')
 <!-- START SECTION BANNER -->
-<div class="banner_section slide_medium shop_banner_slider staggered-animation-wrap">
-    <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
+<div class="banner_section full_screen staggered-animation-wrap">
+    <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow carousel_style2" data-ride="carousel">
         <div class="carousel-inner">
-            <?php $ds = DIRECTORY_SEPARATOR;?>
+        <?php $ds = DIRECTORY_SEPARATOR;?>
             @if(count($bannerData)>0)
                 <?php $i = 1; ?>
                 @foreach($bannerData as $banner)    
                     @if(file_exists(public_path().$ds."uploads"."$ds"."banners"."$ds"."1280x404"."$ds"."$banner->banner_images"))
                             @if($i == 1) 
                             <?php $i++; ?>
-                            <div class="carousel-item background_bg active" data-img-src="uploads/banners/1280x404/{{$banner->banner_images}}">
-                                <div class="banner_slide_content banner_content_inner">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-7 col-10">
-                                                <div class="banner_content overflow-hidden">
-                                                    @if($banner->short_text != '.' && $banner->short_text != '-')
-                                                    <h4 class="mb-3 mb-sm-4 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.3s" style="color: #fff;">{{$banner->short_text}}</h4>
-                                                    @endif
-                                                    @if($banner->banner_heading != '.' && $banner->banner_heading != '-')
-                                                    <h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="0.9s" style="color: #fff;">{{$banner->banner_heading}}</h2>
-                                                    @endif
-                                                    <a class="btn btn-fill-out staggered-animation text-uppercase" href="{{$banner->banner_url}}" target="_blank" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @else 
-                            <div class="carousel-item background_bg" data-img-src="uploads/banners/1280x404/{{$banner->banner_images}}">
-                                <div class="banner_slide_content banner_content_inner">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-7 col-10">
-                                                <div class="banner_content overflow-hidden">
-                                                    @if($banner->short_text != '.' && $banner->short_text != '-' )
-                                                    <h4 class="mb-3 mb-sm-4 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.3s" style="color: #fff;">{{$banner->short_text}}</h4>
-                                                    @endif
-                                                    @if($banner->banner_heading != '.' && $banner->banner_heading != '-')
-                                                    <h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="0.9s" style="color: #fff;">{{$banner->banner_heading}}</h2>
-                                                    @endif
-                                                    <a class="btn btn-fill-out staggered-animation text-uppercase" href="{{$banner->banner_url}}" target="_blank" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="carousel-item active background_bg overlay_bg_50" data-img-src="'uploads/banners/1280x404/{{$banner->banner_images}}'">
+                            @else
+            <div class="carousel-item background_bg overlay_bg_50" data-img-src="'uploads/banners/1280x404/{{$banner->banner_images}}'">
                             @endif
-                    @endif
-                @endforeach
-            @else
-            <div class="carousel-item background_bg active" data-img-src="{{ asset('images/banner-1.jpg')}}">
                 <div class="banner_slide_content banner_content_inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-7 col-10">
-                                <div class="banner_content overflow-hidden">
-                                    <h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="0.5s">-A New You-</h2>
-                                    <h5 class="mb-3 mb-sm-4 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="1s">Swimsuit</h5>
-                                    <a class="btn btn-fill-out staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+                	<div class="container">
+                    	<div class="row justify-content-center">
+                            <div class="col-lg-7 col-md-10">
+                                <div class="banner_content text-center">
+                                    <p class="text_white staggered-animation" data-animation="fadeInUp" data-animation-delay="0.4s">{{$banner->short_text}}</p>
+                                    <h2 class="text_white staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">{{$banner->banner_heading}}</h2>
+                                    <a class="btn btn-white staggered-animation" href="{{$banner->banner_url}}" data-animation="fadeInUp" data-animation-delay="0.5s">Shop Now</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+                    @endif
+                @endforeach
             @endif
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"><i class="ion-chevron-left"></i></a>
