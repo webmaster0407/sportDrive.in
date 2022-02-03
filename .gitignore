@@ -33,4 +33,4 @@ resources/views/layouts/admin.blade.php
 /resources/views/layouts/admin.blade.php
 composer.json
 error_log
-/config/app.ph
+/config/app.php
