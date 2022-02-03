@@ -31,5 +31,6 @@ public/images/Thumbs.db
 package-lock.json
 resources/views/layouts/admin.blade.php
 /resources/views/layouts/admin.blade.php
-
-
+composer.json
+error_log
+/config/app.ph

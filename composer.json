@@ -65,6 +65,10 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true,
-	"platform-check": false
+	"platform-check": false,
+        "allow-plugins": {
+            "composer/installers": true,
+            "kylekatarnls/update-helper": true
+        }
     }
 }
