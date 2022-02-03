@@ -49,6 +49,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}">
 
+    <!-- Custom Common Css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom-common.css') }}">
+    <!-- Css for only Home -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/home/home.css') }}">
+
+
 
     @stack('stylesheets')
 </head>
