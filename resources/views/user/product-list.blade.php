@@ -53,8 +53,8 @@
                             </div>
                             <div class="product_header_right">
                                 <div class="products_view">
-                                    <a href="javascript:Void(0);" class="shorting_icon grid"><i class="ti-view-grid"></i></a>
-                                    <a href="javascript:Void(0);" class="shorting_icon list active"><i class="ti-layout-list-thumb"></i></a>
+                                    <a href="javascript:" class="shorting_icon grid"><i class="ti-view-grid"></i></a>
+                                    <a href="javascript:" class="shorting_icon list active"><i class="ti-layout-list-thumb"></i></a>
                                 </div>
                                 <div class="custom_select">
                                     <select class="form-control form-control-sm"  name="per_page_result" id ="per_page_result" data-filter-type="pp">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div> 
-                <div class="row shop_container list">
+                <div class="row shop_container list" id="prod_list">
                     @if(count($products)>0)
                         @foreach($products as $key=>$product)
                             <?php $ds = DIRECTORY_SEPARATOR;
@@ -93,10 +93,10 @@
                                     @endif
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                            <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                            <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                            <li><a href="#"><i class="icon-heart"></i></a></li>
+                                            <li class="add-to-cart"><a href="javascript:"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                            <li><a href="javascript:" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
+                                            <li><a href="javascript:" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                            <li><a href="javascript:"><i class="icon-heart"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -131,13 +131,13 @@
                                         @endif
                                         <p>{{ $product->short_description }}</p>
                                     </div>
-                                    <div class="pr_switch_wrap">
+       <!--                              <div class="pr_switch_wrap">
                                         <div class="product_color_switch">
                                             <span class="active" data-color="#87554B"></span>
                                             <span data-color="#333333"></span>
                                             <span data-color="#DA323F"></span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="list_product_action_box">
                                         <ul class="list_none pr_action_btn">
                                             <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
@@ -158,49 +158,50 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <ul class="pagination mt-3 justify-content-center pagination_style1">
+                        {{ $links }}
+           <!--              <ul class="pagination mt-3 justify-content-center pagination_style1">
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item"><a class="page-link" href="#"><i class="linearicons-arrow-right"></i></a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 order-lg-first mt-4 pt-2 mt-lg-0 pt-lg-0">
                 <div class="sidebar">
-                    <div class="widget">
+                    <div class="widget" data-filter-type="f">
                         <h5 class="widget_title">For</h5> 
-                        <ul class="list_brand">
+                        <ul class="list_brand checkList">
                             <li>
                                 <div class="custome-checkbox">
-                                    <input class="form-check-input" type="checkbox" name="select" value="m" data-name="Men" id="f_m">
+                                    <input class="for form-check-input" type="checkbox" name="select" value="m" data-name="Men" id="f_m">
                                     <label class="form-check-label" for="f_m"><span>Men</span></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custome-checkbox">
-                                    <input class="form-check-input" type="checkbox" name="select" value="w" data-name="Women" id="f_w">
+                                    <input class="for form-check-input" type="checkbox" name="select" value="w" data-name="Women" id="f_w">
                                     <label class="form-check-label" for="f_w"><span>Women</span></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custome-checkbox">
-                                    <input class="form-check-input" type="checkbox" name="select" value="g" data-name="Girls" id="f_g">
+                                    <input class="for form-check-input" type="checkbox" name="select" value="g" data-name="Girls" id="f_g">
                                     <label class="form-check-label" for="f_g"><span>Girls</span></label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custome-checkbox">
-                                    <input class="form-check-input" type="checkbox" name="select" value="b" data-name="Boys" id="f_b">
+                                    <input class="for form-check-input" type="checkbox" name="select" value="b" data-name="Boys" id="f_b">
                                     <label class="form-check-label" for="f_b"><span>Boys</span></label>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <div class="widget">
+                    <div class="widget" data-filter-type="p">
                         <h5 class="widget_title">Price</h5>
-                        <ul class="list_brand">
+                        <ul class="list_brand checkList">
                             <?php
                                 $slot = ($productsAvg-$productsMin)/3;
                                 $aboveAgvSlot = ($productsMax-$productsAvg)/2;
@@ -241,7 +242,7 @@
                     </div>
                     <div class="widget">
                         <h5 class="widget_title">Category</h5> 
-                        <ul class="list_brand">
+                        <ul class="list_brand checkList">
                             <li>
                                 <div class="custome-checkbox">
                                     <input class="form-check-input" type="checkbox" name="select" checked disabled="true">
@@ -251,9 +252,9 @@
                         </ul>
                     </div>
                     @if($subCategories!=null)
-                        <div class="widget">
+                        <div class="widget"  data-filter-type="sc">
                             <h5 class="widget_title">Category List</h5> 
-                            <ul class="list_brand">
+                            <ul class="list_brand checkList">
                                 @foreach($subCategories as $subCategory)
                                 <li>
                                     <div class="custome-checkbox">
@@ -266,9 +267,9 @@
                         </div>
                     @endif
                     @if($subSubCategories!=null)
-                        <div class="widget">
+                        <div class="widget" data-filter-type="ssc">
                             <h5 class="widget_title">Subcategory List</h5> 
-                            <ul class="list_brand">
+                            <ul class="list_brand checkList">
                                 @foreach($subSubCategories as $subSubCategory)
                                 <li>
                                     <div class="custome-checkbox">
@@ -281,10 +282,10 @@
                         </div>
                     @endif
                     @if($brands!=null)
-                        <div class="widget">
+                        <div class="widget" data-filter-type="b">
                             <h5 class="widget_title">Brand List</h5>
                             <input type="text" id="searchBrand" placeholder="Enter brand" /> 
-                            <ul class="list_brand">
+                            <ul class="list_brand checkList" id="suggesstion-box">
                                 @foreach($brands as $brand)
                                 <li>
                                     <div class="custome-checkbox">
@@ -374,54 +375,43 @@
             datatype: 'JSON',
             success: function(data){
                 $("#suggesstion-box").html(data);
-                $("#searchBrand").css("background","#FFF");
+                // $("#searchBrand").css("background","#FFF");
             }
             });
         });
 
+        // var clickTimer;
+        // $('.static-right-content > div').on('touchstart',function() {
+        //     clearTimeout(clickTimer);
+        //     $(".mob-menu").removeClass("show");
+        //     $(".mob-menu").addClass("hide");
+        //     $(".nav").addClass('hide');
+        //     $(".nav").removeClass("show");
 
-        // script for list and grid view starts here
-        $('.leftSort li').on('click',function() {
-            var w=this.dataset.type; 
-            if ( w=='list' ) {
-                $('.product-List').addClass('list');
-            } else {
-                $('.product-List').removeClass('list');
-            }
-        });
+        //     $(this).addClass('tray').siblings().removeClass('tray');
+        //     clickTimer=setTimeout(function(){$('.static-right-content div').removeClass('tray')},7000)
+        // });
+        // $('body').on('touchstart',function(e) { 
+        //     var _tray=$(e.target).parents('.static-right-content').length; 
+        //     if ( _tray > 0 ) {
+        //         return false;
+        //     } 
+        //     $('.static-right-content div').removeClass('tray');
+        // });
+        // // script for list and grid view ends here
 
-        var clickTimer;
-        $('.static-right-content > div').on('touchstart',function() {
-            clearTimeout(clickTimer);
-            $(".mob-menu").removeClass("show");
-            $(".mob-menu").addClass("hide");
-            $(".nav").addClass('hide');
-            $(".nav").removeClass("show");
-
-            $(this).addClass('tray').siblings().removeClass('tray');
-            clickTimer=setTimeout(function(){$('.static-right-content div').removeClass('tray')},7000)
-        });
-        $('body').on('touchstart',function(e) { 
-            var _tray=$(e.target).parents('.static-right-content').length; 
-            if ( _tray > 0 ) {
-                return false;
-            } 
-            $('.static-right-content div').removeClass('tray');
-        });
-        // script for list and grid view ends here
-
-        $("#empty_list").hide();
-        var clickTimer;
-        $('.static-right-content > div').on('touchstart',function(){
-            clearTimeout(clickTimer);
-            $(".mob-menu").removeClass("show");
-            $(".mob-menu").addClass("hide");
-            $(".nav").addClass('hide');
-            $(".nav").removeClass("show");
-            $(this).addClass('tray').siblings().removeClass('tray');
-            clickTimer=setTimeout(function(){$('.static-right-content div').removeClass('tray')},7000)
-        });
-        $('body').on('touchstart',function(e){var _tray=$(e.target).parents('.static-right-content').length; if(_tray>0){return false}$('.static-right-content div').removeClass('tray')});
+        // $("#empty_list").hide();
+        // var clickTimer;
+        // $('.static-right-content > div').on('touchstart',function(){
+        //     clearTimeout(clickTimer);
+        //     $(".mob-menu").removeClass("show");
+        //     $(".mob-menu").addClass("hide");
+        //     $(".nav").addClass('hide');
+        //     $(".nav").removeClass("show");
+        //     $(this).addClass('tray').siblings().removeClass('tray');
+        //     clickTimer=setTimeout(function(){$('.static-right-content div').removeClass('tray')},7000)
+        // });
+        // $('body').on('touchstart',function(e){var _tray=$(e.target).parents('.static-right-content').length; if(_tray>0){return false}$('.static-right-content div').removeClass('tray')});
 
     });
 
