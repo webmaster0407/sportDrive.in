@@ -115,45 +115,46 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="product_info">
-                                <h6 class="product_title" style="text-align: center; font-size: 12px;"><a href="/product/details/{{$product['slug']}}">{{$product['name']}}</a></h6>
-                                <div class="product_price">
-                                    <div style="text-align:center;">
-                                    <span class="price">&#x20b9 {{number_format($product['price'] - $product['discount_price'],2)}}</span>
-                                    @if($product['price']!=($product['price'] - $product['discount_price']))
-                                        <del>&#x20b9 {{number_format($product['price'],2)}}</del>
-                                    @endif
-                                    </div>
-                                    <div class="on_sale">
-                                        @if($product->offer!=null)
-                                            <h6 style="text-align:center;" >{{$product->offer['name']}}</h6>
-                                            <span style="text-align: center">({{$product->offer['discount']}}% OFF)</span>
-                                            <h6 style="font-size: 14px; text-align: center; color: #444;">*Any color</h6>
+                            <a href="/product/details/{{$product['slug']}}">
+                                <div class="product_info">
+                                    <h6 class="product_title" style="text-align: center; font-size: 14px;">{{$product['name']}}</h6>
+                                    <div class="product_price">
+                                        <div style="text-align:center;">
+                                        <span class="price">&#x20b9 {{number_format($product['price'] - $product['discount_price'],2)}}</span>
+                                        @if($product['price']!=($product['price'] - $product['discount_price']))
+                                            <del>&#x20b9 {{number_format($product['price'],2)}}</del>
+                                        @endif
+                                        </div>
+                                        <div class="on_sale">
+                                            @if($product->offer!=null)
+                                                <h6 style="text-align:center;" >{{$product->offer['name']}}</h6>
+                                                <div style="text-align: center;"><span style="text-align: center">({{$product->offer['discount']}}% OFF)</span></div>
+                                                <br />
+                                                <h6 style="font-size: 14px; text-align: center; color: #444;">*Any color</h6>
+                                            @else 
+                                                <h6 >&nbsp;</h6>
+                                                <p>&nbsp;</p>
+                                                <br />
+                                                <h6 >&nbsp;</h6>
+                                            @endif
+                                        </div>
+                                        @if($product['video_url']!=null)
+                                                <a class="playI" data-vid="{{$product['video_url']}}" id="youtube"  data-toggle="modal" data-target="#youtube_video" data-keyboard="true" href="#">
+                                                <img src="{{ asset('/images/you_tube.png')}}" style="margin-left: auto; margin-right: auto; width: 30px;">
+                                                </a>
                                         @else 
-                                            <h6 >&nbsp;</h6>
-                                            <p>&nbsp;</p>
-                                            <h6 >&nbsp;</h6>
+                                                <div style="margin-top: 30px;"></div>
                                         @endif
                                     </div>
-                                    @if($product['video_url']!=null)
-                                            <a class="playI" data-vid="{{$product['video_url']}}" id="youtube"  data-toggle="modal" data-target="#youtube_video" data-keyboard="true" href="#">
-                                            <img src="{{ asset('/images/you_tube.png')}}" style="margin-left: auto; margin-right: auto; width: 30px;">
-                                            </a>
-                                    @else 
-                                            <div style="margin-top: 30px;"></div>
-                                    @endif
-                                </div>
-                                <div class="rating_wrap">
-                                    <div class="rating">
-                                        <div class="product_rate" style="width:68%"></div>
+                                    <div class="rating_wrap" style="text-align: center;">
+                                        <div class="rating">
+                                            <div class="product_rate" style="width:100%"></div>
+                                        </div>
+                                        <!-- <span class="rating_num">(+5)</span> -->
                                     </div>
-                                    <span class="rating_num">(15)</span>
                                 </div>
-                                <div class="pr_desc">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                </div>
-                            </div>
-                        </div>
+                            </a>
+                        </div>   
                     </div>
                     @endforeach
                 </div>
