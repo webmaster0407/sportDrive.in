@@ -131,13 +131,7 @@
                                         @endif
                                         <p>{{ $product->short_description }}</p>
                                     </div>
-       <!--                              <div class="pr_switch_wrap">
-                                        <div class="product_color_switch">
-                                            <span class="active" data-color="#87554B"></span>
-                                            <span data-color="#333333"></span>
-                                            <span data-color="#DA323F"></span>
-                                        </div>
-                                    </div> -->
+
                                     <div class="list_product_action_box">
                                         <ul class="list_none pr_action_btn">
                                             <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
@@ -159,12 +153,7 @@
                 <div class="row">
                     <div class="col-12">
                         {{ $links }}
-           <!--              <ul class="pagination mt-3 justify-content-center pagination_style1">
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><i class="linearicons-arrow-right"></i></a></li>
-                        </ul> -->
+
                     </div>
                 </div>
             </div>

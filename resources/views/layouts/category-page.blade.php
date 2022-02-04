@@ -33,11 +33,8 @@
 <meta name="title" content="{{$category['meta_title']}}">
 <meta name="keywords" content="{{$category['meta_keyword']}}">
 <meta name="description" content="{{$category['meta_desc']}}">
-@if(Route::currentRouteName()!= null && (Route::currentRouteName()== "checkout1" || Route::currentRouteName()== "orderDetail" || Route::currentRouteName()== "orderList" || Route::currentRouteName()== "ListCategoryProduct")){{--apply bootstrap css for checkout page only--}}
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-@endif
     <!-- Animation CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css')}}">   
     <!-- Latest Bootstrap min CSS -->
@@ -69,8 +66,10 @@
 
     <!-- Custom Common Css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom-common.css') }}">
-    <!-- Css for only Home -->
+    <!-- Css for only category page -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/category/category-page.css') }}">
+    <!-- Css for only search page -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/search/search.css') }}">
 
 </head>
 <body>
