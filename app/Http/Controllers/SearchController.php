@@ -154,8 +154,9 @@ class SearchController extends Controller
                   $products[$key]['offer'] = $offer;
               }
               //meta data info
+              $links = $products->links();
               $category['name'] = $category['meta_title'] = $category['meta_keyword'] = $category['meta_desc'] = "Search - ".$searchText;
-              return view("user.search-list")->with(compact("products","allProductIdsData","searchText","category","selectedCategories","mainCategories"));
+              return view("user.search-list")->with(compact("products","allProductIdsData","searchText","category","selectedCategories","mainCategories", "links"));
           }
       }catch (\Exception $e){
           $data = [

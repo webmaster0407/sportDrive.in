@@ -34,10 +34,7 @@
 <meta name="keywords" content="{{$product['meta_keyword']}}">
 <meta name="description" content="{{$product['meta_description']}}">
 <script src="{{asset("js/min.js")}}" type="text/javascript" language="javascript"></script>
-@if(Route::currentRouteName()!= null && (Route::currentRouteName()== "checkout1" || Route::currentRouteName()== "orderDetail" || Route::currentRouteName()== "orderList" || Route::currentRouteName()== "product_details")){{--apply bootstrap css for checkout page only--}}
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-@endif
+
 
 {{--font awesome--}}
 <link href="{{asset("css/font-awesome.css")}}" rel="stylesheet" type="text/css">

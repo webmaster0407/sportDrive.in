@@ -1,0 +1,13 @@
+/*for subCategory*/
+.category > li {
+	font-weight: bold;
+}
+
+/*for subsubCategory*/
+
+.subCategory > li {
+	margin-left: 30px;
+	color: #555;
+}
+
+
