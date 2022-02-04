@@ -1,4 +1,7 @@
 
+/* 
+ * Header search form
+ */
 header .product_search_form.radius_input {
     overflow: inherit;
 }
@@ -46,4 +49,25 @@ header .product_search_form.radius_input {
     header .product_search_form.radius_input {
         position: relative;
     }
+}
+/* 
+ * Category mega menu 
+ */
+#navCatContent li.dropdown-mega-menu > a {
+    font-size: 16px;
+}
+#navCatContent li.dropdown-mega-menu > a.dropdown-toggler {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    bottom: 0;
+    cursor: pointer;
+}
+#navCatContent li.dropdown-mega-menu > a.dropdown-toggler:after {
+    position: static;
 }

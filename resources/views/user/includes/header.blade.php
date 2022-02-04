@@ -113,9 +113,10 @@
                             <ul> 
                                 @foreach($categories as $category)
                                 <li class="dropdown dropdown-mega-menu">
-                                    <a class="dropdown-item nav-link dropdown-toggler" href="/category/{{$category['slug']}}?page=1" data-toggle="dropdown">
-                                        <i class="flaticon-tv"></i> <span>{{$category['name']}}</span>
+                                    <a class="nav-link" href="/category/{{$category['slug']}}?page=1">
+                                        <span>{{$category['name']}}</span>
                                     </a>
+                                    <a class="dropdown-item nav-link dropdown-toggler" data-toggle="dropdown"></a>
                                     <div class="dropdown-menu">
                                         <ul class="mega-menu d-lg-flex">
                                             @if($category['image']!=null)
