@@ -64,8 +64,25 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}">
+
+
+
+    <!-- Custom Common Css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom-common.css') }}">
+    <!-- Css for only Home -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/category/category-page.css') }}">
+
 </head>
 <body>
+<!-- LOADER -->
+<div class="preloader">
+    <div class="lds-ellipsis">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<!-- END LOADER -->
     <div class="full_wrapper">
         <header>
           @include('user.includes.header')  
@@ -75,7 +92,7 @@
 <footer>
 @include('user.includes.footer')
 </footer>
-
+<script src="{{asset("js/search.js")}}" type="text/javascript" language="javascript"></script>
 <script>
 
 	var isMobileNav=window.matchMedia('max-width:980px').matches;

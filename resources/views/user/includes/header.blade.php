@@ -42,7 +42,7 @@
     <div class="middle-header dark_skin">
     	<div class="container">
             <div class="nav_block">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{ route('index') }}">
                     <img class="logo_dark" src="{{ asset('images/logo.png')}}" alt="logo">
 <!--                     <img class="logo_dark" src="{{ asset('assets/images/logo_dark.png')}}" alt="logo"> -->
                 </a>
@@ -118,7 +118,11 @@
                                     </a>
                                     <div class="dropdown-menu">
                                         <ul class="mega-menu d-lg-flex">
+                                            @if($category['image']!=null)
                                             <li class="mega-menu-col col-lg-8">
+                                            @else
+                                            <li class="mega-menu-col col-lg-12">
+                                            @endif
                                                 <ul class="d-lg-flex">
                                                     <?php $subCatCount = count($category['sub_categories']);?>
                                                     @foreach($category['sub_categories'] as $subCatKeys=>$subCategory)
@@ -149,8 +153,8 @@
                                                     @endforeach
                                                 </ul>
                                             </li>
+                                            @if($category['image']!=null)
                                             <li class="mega-menu-col col-lg-4">
-                                                @if($category['image']!=null)
                                                 <div class="header-banner2">
                                                     <img src="/uploads/categories/426x210/{{$category['image']}}" alt="menu_banner1">
                                                     <div class="banne_info">
@@ -159,8 +163,8 @@
                                                         <a href="#">Shop now</a>
                                                     </div>
                                                 </div>
-                                                @endif
                                             </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </li>
