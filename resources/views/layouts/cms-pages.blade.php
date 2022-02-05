@@ -14,21 +14,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=IE10" />
 <meta http-equiv="X-UA-Compatible" content="IE=IE11" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]> <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]> <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]> <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <!--<![endif]-->
-<!--[if lt IE 9]>
-   <script>
-      document.createElement('header');
-      document.createElement('nav');
-      document.createElement('section');
-      document.createElement('article');
-      document.createElement('aside');
-      document.createElement('footer');
-   </script>
-<![endif]-->
+
 <title>{{$cmsPage['page_title']}}</title>
 <meta name="title" content="{{$cmsPage['meta_title']}}">
 <meta name="keywords" content="{{$cmsPage['meta_keyword']}}">
@@ -70,21 +56,7 @@
 <script src="{{asset("js/jquery-ui.js")}}" type="text/javascript" language="javascript"></script>
 <script>
 
-	var isMobileNav=window.matchMedia('max-width:980px').matches;
-	
-	if(!isMobileNav){
-		var menuLi=document.querySelectorAll('.navigation .navBar li i.ico');
-		console.log(menuLi)
-		menuLi.forEach(function(li){
-			li.addEventListener('click',toggleMenu);
-		})
-	}
-	function toggleMenu(e){
-		e.target.parentNode.classList.toggle('show');
-	}
-	$('.menuOverlay').on('click',function(){$(this).prev().removeClass('show')})
 
-   
 
 </script>
     <script>

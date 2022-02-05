@@ -77,64 +77,16 @@
 <footer>
     @include('user.includes.footer')
 </footer>
-<script src="{{asset("js/search.js")}}" type="text/javascript" language="javascript"></script>
-<script>        
-    $(document).ready(function(){
-    var isMobileNav=window.matchMedia('max-width:980px').matches;
+<script src="{{asset('js/search.js')}}" type="text/javascript" language="javascript"></script>
 
-    if(!isMobileNav){
-        var menuLi=document.querySelectorAll('.navigation .navBar li i.ico');
-        console.log(menuLi)
-        menuLi.forEach(function(li){
-            li.addEventListener('click',toggleMenu);
-        })
-    }
-    function toggleMenu(e){
-        e.target.parentNode.classList.toggle('show');
-    }
-    $('.menuOverlay').on('click',function(){$(this).prev().removeClass('show')})
-
-    $('.featureProduct').owlCarousel({
-        itemsDesktop : [1199,4],
-        itemsDesktopSmall : [980,3],
-        itemsTablet: [768,2],
-        itemsTabletSmall: false,
-        itemsMobile : [479,1],
-        singleItem : false,
-        loop:true,
-        margin:10,
-        autoplay:true,
-        rewindNav:true,
-        stopOnHover:true,
-        autoplayHoverPause:true,
-        navigation:true,
-        navigationText : false,
-        responsiveClass:true,
-        responsive: true,
-        responsiveRefreshRate : 200
-    });
-
-});
-</script>
-<script type="text/javascript">
-    $('a[href^="#"]').on('click', function(event) {
-        var target = $(this.getAttribute('href'));
-        if( target.length ) {
-            event.preventDefault();
-            $('html, body').stop().animate({
-                scrollTop: target.offset().top
-            }, 1500);
-        }
-    });
-</script>
 <script>
     var label=document.querySelector('.all-search span'),
         catfilter = document.querySelector('.category-select');
         catfilter.addEventListener('change',updateLabel);
-function updateLabel(){
-	var ind=this.selectedIndex+1;
-    label.innerHTML = $('option:nth-child('+ind+')',catfilter).text();
-}
+    function updateLabel(){
+    	var ind=this.selectedIndex+1;
+        label.innerHTML = $('option:nth-child('+ind+')',catfilter).text();
+    }
 </script>
 @stack('scripts')
 

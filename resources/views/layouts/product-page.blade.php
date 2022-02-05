@@ -15,6 +15,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=IE11" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+
+<title>{{$product['name']}}</title>
+<meta name="title" content="{{$product['meta_title']}}">
+<meta name="keywords" content="{{$product['meta_keyword']}}">
+<meta name="description" content="{{$product['meta_description']}}">
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Animation CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/animate.css')}}">   
@@ -75,23 +82,6 @@
 
 
 <script src="{{asset('js/search.js')}}" type="text/javascript" language="javascript"></script>
-
-<script>
-
-	var isMobileNav=window.matchMedia('max-width:980px').matches;
-	
-	if(!isMobileNav){
-		var menuLi=document.querySelectorAll('.navigation .navBar li i.ico');
-		console.log(menuLi)
-		menuLi.forEach(function(li){
-			li.addEventListener('click',toggleMenu);
-		})
-	}
-	function toggleMenu(e){
-		e.target.parentNode.classList.toggle('show');
-	}
-	$('.menuOverlay').on('click',function(){$(this).prev().removeClass('show')})
-</script>
 
 @stack('scripts')
     <script>
