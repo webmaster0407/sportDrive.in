@@ -207,7 +207,7 @@
                       	<div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
                         	<div class="comments">
                             	<h5 class="product_tab_title">Review for  <span>Blue Dress For Woman</span></h5>
-								@if( is_array($ratingReviews) && count($ratingReviews) >0)
+								@if( count($ratingReviews) >0)
 									<div class="toppaging paginationLink">
 										{{ $ratingReviews->links() }}
 									</div>
@@ -261,12 +261,13 @@
 										<input type="hidden" name="review_url" id="review_url" value="{{\Illuminate\Support\Facades\Request::fullUrl()}}">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	                                    <div class="form-group col-12">
+	                                    	<input type="hidden" name="rating" required id="rating" value="" />
 	                                        <div class="star_rating">
-	                                            <span data-value="1"><i class="far fa-star"></i></span>
-	                                            <span data-value="2"><i class="far fa-star"></i></span> 
-	                                            <span data-value="3"><i class="far fa-star"></i></span>
-	                                            <span data-value="4"><i class="far fa-star"></i></span>
-	                                            <span data-value="5"><i class="far fa-star"></i></span>
+	                                            <span data-value="1" class="add_review_star"><i class="far fa-star"></i></span>
+	                                            <span data-value="2" class="add_review_star"><i class="far fa-star"></i></span> 
+	                                            <span data-value="3" class="add_review_star"><i class="far fa-star"></i></span>
+	                                            <span data-value="4" class="add_review_star"><i class="far fa-star"></i></span>
+	                                            <span data-value="5" class="add_review_star"><i class="far fa-star"></i></span>
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group col-12">
