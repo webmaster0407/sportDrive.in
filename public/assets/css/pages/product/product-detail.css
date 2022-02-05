@@ -1,0 +1,18 @@
+.pr_flash {
+	top: 72px;
+	right: 8px;
+	left: auto;
+	background-color: transparent;
+	text-align:  right;
+}
+
+.pr_flash > img {
+	width: 30%;
+}
+
+.outstockSize {
+	pointer-events: none;
+    background: #c3c3c3!important;
+    cursor: default;
+    color: #fff!important;
+}

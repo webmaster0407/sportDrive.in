@@ -14,62 +14,48 @@
 <meta http-equiv="X-UA-Compatible" content="IE=IE10" />
 <meta http-equiv="X-UA-Compatible" content="IE=IE11" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]> <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]> <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]> <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <!--<![endif]-->
-<!--[if lt IE 9]>
-   <script>
-      document.createElement('header');
-      document.createElement('nav');
-      document.createElement('section');
-      document.createElement('article');
-      document.createElement('aside');
-      document.createElement('footer');
-   </script>
-<![endif]-->
+
 <title>{{$category['name']}}</title>
 <meta name="title" content="{{$category['meta_title']}}">
 <meta name="keywords" content="{{$category['meta_keyword']}}">
 <meta name="description" content="{{$category['meta_desc']}}">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Animation CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/animate.css')}}">   
-    <!-- Latest Bootstrap min CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"> 
-    <!-- Icon Font CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/all.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/ionicons.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/linearicons.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/simple-line-icons.css')}}">
-    <!--- owl carousel CSS-->
-    <link rel="stylesheet" href="{{ asset('assets/owlcarousel/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/owlcarousel/css/owl.theme.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/owlcarousel/css/owl.theme.default.min.css')}}">
-    <!-- Magnific Popup CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css')}}">
-    <!-- Slick CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/slick.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/slick-theme.css')}}">
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Animation CSS -->
+<link rel="stylesheet" href="{{ asset('assets/css/animate.css')}}">   
+<!-- Latest Bootstrap min CSS -->
+<link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"> 
+<!-- Icon Font CSS -->
+<link rel="stylesheet" href="{{ asset('assets/css/all.min.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/css/ionicons.min.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/css/linearicons.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/css/flaticon.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/css/simple-line-icons.css')}}">
+<!--- owl carousel CSS-->
+<link rel="stylesheet" href="{{ asset('assets/owlcarousel/css/owl.carousel.min.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/owlcarousel/css/owl.theme.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/owlcarousel/css/owl.theme.default.min.css')}}">
+<!-- Magnific Popup CSS -->
+<link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css')}}">
+<!-- Slick CSS -->
+<link rel="stylesheet" href="{{ asset('assets/css/slick.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/css/slick-theme.css')}}">
+<!-- Style CSS -->
+<link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}">
 
 
 
-    <!-- Custom Common Css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom-common.css') }}">
-    <!-- Css for only category page -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/category/category-page.css') }}">
-    <!-- Css for only search page -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/search/search.css') }}">
+<!-- Custom Common Css -->
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom-common.css') }}">
+<!-- Css for only category page -->
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/category/category-page.css') }}">
+<!-- Css for only search page -->
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/search/search.css') }}">
 
 </head>
 <body>

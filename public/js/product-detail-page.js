@@ -1,10 +1,3 @@
-
-var userAgent=window.navigator.userAgent;
-var isMobile=/iPhone|iPad|android/i.test(userAgent);
-console.log(isMobile)
-var options={on:isMobile?'click':'mouseover',touch:isMobile?false:true}
-    $('#ex3').zoom(options);
-
 $(document).ready(function(){
    
     if($(".colorselect").length == 1)
@@ -246,7 +239,6 @@ $(document).ready(function(){
 
         });
 
-console.log(subtotalAfterDiscount);
 
     });
     $(".input-number").keydown(function (e) {

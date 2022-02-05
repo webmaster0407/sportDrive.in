@@ -3,476 +3,530 @@
    
 @endpush
 @section('content')
-	<script src="{{asset("js/slider.min.js")}}" type="text/javascript" language="javascript"></script>
-	<style>
-		.zoom:after {
-			content:'';
-			display:block;
-			width:33px;
-			height:33px;
-			position:absolute;
-			top:0;
-			right:0;
-		}
-		.zoom img {
-			display: block;
-		}
-		.zoom img::selection { background-color: transparent; }
-		
-		.rating ul{margin:0;padding:0;}
-		.rating li{cursor:pointer;list-style-type: none;display: inline-block;color: #F0F0F0;text-shadow: 0 0 1px #666666;font-size:20px;}
-		.rating .highlight, .rating .selected {color:#F4B30A;text-shadow: 0 0 1px #F48F0A;}
-		.ajaxLoader{
-			z-index: 1;display:none;width:100%;height:100%;position:absolute;top:0%;left:0%;padding:2px; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);
-		}
-		.ajaxLoader .loaderImg{
-			margin-left: 50%; margin-top: 30%;
-		}
-		.sizechartDiv img{width:100%;}
-		.selColorInit {
-			border:2px !important;
-			border-color: black !important;
-			border-style: solid !important;
-		}
-		.outstockSize{pointer-events: none;background: #c3c3c3!important;cursor: default;color: #fff!important;}
-		.product-main-img > i,.product-zoom-img > i.zoomClose{position: absolute;top: 0;right: 0;z-index: 2;width: 30px;height: 30px;background: rgba(0,0,0,.1);border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 18px;color: #888; cursor:pointer; transition: all 0.5s;-webkit-transition: all 0.5s;-moz-transition: all 0.5s;-ms-transition: all 0.5s;-o-transition: all 0.5s;}
-		.product-zoom-img > i.zoomClose{border-radius:6px; width:36px; height:36px; background:rgba(0,0,0,0.0);top:15px; right:10px;}
-	.product-main-img > i:hover,.product-zoom-img > i:hover{background:#de4d4d; color:#fff;}
-	.product-zoom-img > i:hover svg{fill:#fff;}
-    #productZoom{width:100%; height:100%;position:fixed;top:0;left:0; background:rgba(255,255,255,1); opacity:0; visibility:hidden;z-index:99;}
-	.zoom--open #productZoom{opacity:1;visibility:visible;}
-	.zoom--open{overflow:hidden;}
-	.product-zoom-img{height:100%;}
-	.product-main-img .swiper-button-next{height:24px;}
-	.product-main-img .swiper-button-prev{height:24px;}
-	</style>
-	<div class="content">
-		<div class="listingContent">
-			@if(Session::has('error'))
-				<div class="alert alert-danger" id="errorMessage">
-					{{Session::get('error')}}
-				</div>
-			@endif
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="hidden" name="pid" id="pid" value="{{$product->id}}">
-			<div class="container">
-				<div class="leftImg">
-					<div class="product-main-img">
-						@if($product->icon!=null)
-							<div class="justarrive">
-								<span> <img src="/uploads/product_icon/{{$product->id}}/{{$product->icon}}"></span>
-							</div>
-						@endif
-					<i class="fa fa-search-plus expandProd" aria-hidden="true"></i>
-						<ul class="swiper-wrapper">
-						@if(count($productConfiguration) >0)
-								@foreach($productConfiguration as $pConfig)
-									@if($pConfig->config_img != null)
-										<li class="product-img" ><img src="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" alt=""></li>
-									@endif
-								@endforeach
-							@endif
-						</ul>
-						<div class="swiper-button-prev"></div>
-    					<div class="swiper-button-next"></div>
-					</div>
-					<!-- config images list -->
-					<div class="product-thumbs">
-						<ul class="swiper-wrapper imgList listingSlider" id="colorimgList">
-							@if(count($productConfiguration) >0)
-								@foreach($productConfiguration as $pConfig)
-									@if($pConfig->config_img != null)
-										<li class="configimgList changeImg" data-val="{{$pConfig->config_img}}" data-config="{{$pConfig->color_id}}"><img src="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/80x85/'.$pConfig->config_img)}}" alt="config-image"></li>
-									@endif
-								@endforeach
-							@endif
-							
-						</ul>
-					</div>
-				</div>
-				<script>
-					function addZoomContent(){var o=$("<div />",{html:zoomImgs});$(".expandProd",o).remove(),o.find("img").each(function(){$(this).wrap('<div class="swiper-zoom-container"></div>')}),$(".product-main-img",o).addClass("product-zoom-img").removeClass("product-main-img").append('<i class="zoomClose" aria-hidden="true" onclick="javascript:document.body.classList.remove(\'zoom--open\')"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" version="1.1" width="32px" height="32px"><g id="surface1"><path style=" " d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z "/></g></svg></i>'),$("#productZoom").html(o.html()),zoomSlider=new Slider(".product-zoom-img",{zoom:{maxRatio:3},spaceBetween:10,loop:!1,keyboard:!0,slideClass:"product-img",navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"}})}var zoomImgs=$(".product-main-img").clone(),slider=new Slider(".product-main-img",{spaceBetween:10,init:!0,loop:!1,keyboard:!0,slideClass:"product-img",navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"}}),thumbslider=new Slider(".product-thumbs",{slidesPerView:"auto",loop:!1,slideClass:"configimgList",spaceBetween:5,touchRatio:.2});slider.controller.control=thumbslider,$("#colorimgList li").on("click",function(){slider.slideTo($(this).index(),0)});var zoomSlider=null,executed=!1;$(".expandProd").on("click",function(){!executed&&addZoomContent(),document.body.classList.add("zoom--open"),zoomSlider&&zoomSlider.slideTo(slider.realIndex,0)});
-				</script>
-				<div class="right-description">
-					<h3>{{$product->name}}</h3>
-					<small>{{$product->sku}}</small>
-					<p><strong>({{$brandName->name}})</strong></p>
-					<div class="page-wrap">
-						@if($totalRatings>0)
-							<div class="rating">
-								<ul >
-                                    <?php
-                                    for($j=1;$j<=5;$j++) {
-                                    $selected = "";
-                                    if($ratingAvg != 0 && $j<=$ratingAvg) {
-                                        $selected = "selected";
-                                    }
-                                    ?>
-									<li class="<?php echo $selected; ?>" >&#9733;</li>
-                                    <?php }  ?>
-									</ul>
-								<div class="rating-num">
-									<p>({{$totalRatings}} reviews)</p>
-								</div>
-								@if($product->video_url!=null)
-									<div class="you_tube"><img src="/images/you_tube.png" alt="you tube">
-										<a id="youtube"  data-toggle="modal" data-target="#youtube_video" data-keyboard="true" href="#">Click to watch product video</a>
-									</div>
-								@endif
-							</div>
-						@else
-							<div class="rating">
-								<p>(No reviews yet.)</p>
-								@if($product->video_url!=null)
-									<div class="you_tube">
-										<img src="/images/you_tube.png" alt="you tube">
-										<a id="youtube"  data-toggle="modal" data-target="#youtube_video" data-keyboard="true" href="#">Click here to check video</a>
-									</div>
-								@endif
-							</div>
-						@endif
-					</div>
-					@if($product->price!=$finalprice)<h3 class="strike-span"> ₹ {{number_format($product->price,2)}}</h3>@endif
-					<p id="configPrice"><span> ₹ {{number_format($finalprice,2)}}</span></p>
-					<ul class="notes">
-						<p>{!! nl2br(e($product->short_description)) !!}</p>
-					</ul>
-					<form action="/product/add-to-cart/{{$product->id}}" name="frmAddCart" id="frmAddCart" method="post">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						@if((count($getattributesSize)>=1) || (count($getattributesColor)>=1))
-							<div class="size-color">
-								@if(count($getattributesColor)>=1)
-									<div class="size">
-										@if(strcasecmp($getattributesColor[0]->name ,"No Color") != 0 )
-										<h4>Color</h4>
-										@endif
-										<input type="hidden" name="selectedColor" id="selectedColor" value="@if(count($getattributesColor)== 1) {{$getattributesColor[0]->AttributeColor}} @endif">
-										<ul class="size-list color">
-											@foreach($getattributesColor as $color)
-											  <?php if(strcasecmp($color->name ,"No Color") != 0 ) {?>
-												<li class="colorselect" data-val="{{$color->AttributeColor}}" data-img="@if($color->colorImage != null){{$color->colorImage}}  @endif" >
-													<div title="{{$color->name}}" id="{{$color->AttributeColor}}" style="min-height: 45px; @if($color->colorImage== null) background-color: #{{$color->hex_color}}@endif">
-														@if($color->colorImage != null)
-															<img src="{{URL::asset('uploads/products/images/'.$color->product_id.'/80x85/'.$color->colorImage)}}
-																	" width="45" height="45" align="center">
-														@endif
-													</div>
-												</li>
-												<?php } ?>
-											@endforeach
 
-										</ul>
-									</div>
-								@endif
-								@if(count($getattributesSize)>=1)
-									<div class="size">
-										<h4>Size</h4>
-										<input type="hidden" name="selectedSize" id="selectedSize" value="@if(count($getattributesSize)== 1) {{$getattributesSize[0]->AttributeSize}} @endif">
-										<ul class="size-list" id="size-list">
-											@foreach($getattributesSize as $size)
-												<li class="sizeselect @if($size->quantity >0)@else outstockSize @endif" data-val="{{$size->AttributeSize}}">{{$size->name}}</li>
-											@endforeach
-										</ul>
-									</div>
-								@endif
-									<div class="size">
-										<h4 class="blank_h">&nbsp;</h4>
-										@if(($product->size_chart_type =="image" && $product->size_chart_image != null) ||($product->size_chart_type =="desc" && $product->size_chart_description!=null))
-												<div class="size-chart">
-													<a href="#" id="myBtn"  data-toggle="modal" data-target="#size_chart" data-keyboard="true">Size Chart</a>
-												</div>
 
-										@endif
-										<div class="stock-Div">
-											<a href="#" id="stockBtn"  data-toggle="modal" data-target="#stock_model" data-keyboard="true">Stock Availability</a>
-										</div>
-									</div>
-							</div>
-						@endif
-						<div class="quantity-Div">
-							<span class="qnty-minus btn-number" data-type="minus" data-field="quantity" id="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-							<span><input class="input-number" type="text" name="quantity" value="1" data-price="{{$finalprice}}" min="1" max= "{{$product->quantity}}"></span>
-							<span class="qnty-add btn-number" data-type="plus" data-field="quantity" id="add"><i class="fa fa-plus" aria-hidden="true"></i></span>
-						</div>
 
-						{{--new chnage by sagar for offers starts--}}
-						@if($offer!=null)
-							<input type="hidden" name="offer_discount" id="offer_discount" value="{{$offer['discount']}}">
-							<input type="hidden" name="offer_quantity" id="offer_quantity" value="{{$offer['quantity']}}">
-							<input type="hidden" name="total_price" id="total_price" value="{{$finalprice}}">
-							<input type="hidden" name="clicked_type" id="clicked_type" value="">
 
-						<div class="chose-second">
-							<h4>{!! $offer->short_description !!}</h4>
-							<span class="any">*Any color</span>
-							<ul>
-								@foreach($productOffers as $productOffer)
-									<li>
-										<a href="/product/details/{{$productOffer->slug}}" target="_blank"><img src="{{URL::asset('uploads/products/images/'.$productOffer->id.'/80x85/'.$productOffer->image)}}" alt="config-image"></a>
-										<div class="quantity-Div" id="price" >
-											<span class="qnty-minus btn-number" data-type="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-											<span><input class="input-number" min="0" max="10" type="text" data-price="{{$productOffer['price']-$productOffer['discount_price']}}" name="otherQuantity[{{$productOffer->id}}][quantity]" value="0"></span>
-											<span class="qnty-add btn-number" data-type="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
-										</div>
-									</li>
-							    @endforeach
-							</ul>
-							<h4>{!! $offer->description !!}</h4>
-							<ul class="total ammount" style="display: none">
-								<li><span>{{$product->sku}}</span><span>1</span><span>₹ {{number_format($finalprice,2)}}</span></li>{{--main products sku and price--}}
-								@foreach($productOffers as $productOffer)
-									<li style="display: none" class="other-sku"><span>{{$productOffer->sku}}</span><span>1</span><span>&#8377 {{number_format(($productOffer->price - $productOffer->discount_price),2)}}</span></li>
-								@endforeach
-								<li><span class="off">Less-{{$offer->discount}}%</span><span></span><span></span></li>
-								<li><span>Total</span><span></span><span>₹ {{number_format($finalprice,2)}}</span></li>
-							</ul>
-						</div>
-						@endif
-						{{--new chnage by sagar for offers ends--}}
+<!-- START SECTION BREADCRUMB -->
+<div class="breadcrumb_section bg_gray page-title-mini">
+    <div class="container"><!-- STRART CONTAINER -->
+        <div class="row align-items-center">
+        	<div class="col-md-6">
+                <div class="page-title">
+            		<h1>Product Detail</h1>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ol class="breadcrumb justify-content-md-end">
+                    <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Product Detail</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- END CONTAINER-->
+</div>
+<!-- END SECTION BREADCRUMB -->
 
-						<div class="btn-list">
-							<input type="submit"   name="AddToCart"  class="add-button add-cart" value="ADD TO CART"/>
-						</div>
-					</form>
-				</div>
-				<div class="clear"></div>
-				<div id="tab-list">
-					<ul class="tab-list">
-						<li class="active" id="tab-desc"><a href="#description">Description</a></li>
-						<li id="tab-spec"><a href="#specification">Specification</a></li>
-						<!-- <li><a href="#technology">Technologies</a></li> -->
-						<li id="tab-review"><a href="#review">Rating & Reviews</a></li>
-					</ul>
-					<div class="description-list" id="description">
-						<h2>Description</h2>
-						<p>{!! $product->description !!}</p>
-					</div>
-					<div class="description-list" id="specification">
-						<h2>Specification</h2>
-						<div>{!! $product->product_specifications !!}</div>
-					</div>
-					<div class="description-list" id="review">
-						<h2>Write a Review</h2>
-					@if($flag == false && $user != null)
-							@if ($errors->has('rating'))
-								<div class="alert alert-danger">
-									{{ $errors->first('rating') }}
-								</div>
-							@endif
-							@if ($errors->has('message'))
-								<div class="alert alert-danger">
-									{{ $errors->first('message') }}
-								</div>
-							@endif
-							<form  method="POST" name="frmReview" id="review-form" action="/product/add-review/{{$product->id}}" >
-								<input type="hidden" name="review_url" id="review_url" value="{{\Illuminate\Support\Facades\Request::fullUrl()}}">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<div class="row">
-									<label>Name<span>*</span></label>
-									<input type="text" name="name"  required value="@if($user != null){{$user->first_name}}@endif">
-								</div>
-								<div class="row">
-									<label>Email Id<span>*</span></label>
-									<input type="email" required name="email" @if($user != null)  value="{{$user->email_address}}" readonly  @endif>
-								</div>
-								<div class="row fullrow">
-									<label>Your Rating</label>
-									<div class="page-wrap">
-										<div class="rating" id="enterRating">
-											<input type="hidden" name="rating" required id="rating" value="" />
-											<ul  onmouseout="resetRating();">
-                                                <?php
-                                                for($i=1;$i<=5;$i++) {
-                                                $selected = "";
-                                                ?>
-												<li class="<?php echo $selected; ?>" onmouseover="highlightStar(this);" onmouseout="removeHighlight();" onClick="addRating(this);" >&#9733;</li>
-                                                <?php }  ?>
-												</ul>
-										</div>
-									</div>
-								</div>
-								<div class="row fullrow">
-									<label>Message</label>
-									<textarea name="message"></textarea>
-								</div>
-								<div class="row fullrow">
-									<input type="submit" value="Submit" required name="submit" class="add-button" >
-								</div>
-							</form>
-						@elseif($user == null)
-							<p><b>Please login to add review & rating.</b></p>
-						@elseif($flag == true)
-							<p><b>You are already rated this Product.</b></p>
-						@else
-							<p></p>
-						@endif
-						<div class="review-List">
-							<div class="page-Headername">
-								<h2>Rating & Reviews</h2>
-								@if(count($ratingReviews) >0)
-									<div class="toppaging paginationLink">
-										{{ $ratingReviews->links() }}
-									</div>
-							</div>
-							<ul class="review-name" id="reviewList">
-								@foreach($ratingReviews as $review)
-									<li>
-										<h4>{{$review->name}}</h4>
-										<div class="rating">
-											<ul class="star-rating-name">
-                                                <?php
-                                                $i=1;
-                                                for($i=1;$i<=5;$i++) {
-                                                $selected = "";
-                                                if(!empty($review["rating"]) && $i<=$review["rating"]) {
-                                                    $selected = "selected";
-                                                }
-                                                ?>
-												<li class="<?php echo $selected; ?>" >&#9733;</li>
-                                                <?php }  ?>
-												</ul>
 
-										</div>
-										<p>{{$review->message}}</p>
-									</li>
-								@endforeach
-							</ul>
-							@else
-								<div id="empty_list">
-									<p>There are no reviews yet.</p>
-								</div>
-							@endif
-						</div>
-					</div>
-				</div>
-			</div>
+<!-- START MAIN CONTENT -->
+<div class="main_content">
+
+<!-- START SECTION SHOP -->
+<div class="section">
+	@if(Session::has('error'))
+		<div class="alert alert-danger" id="errorMessage">
+			{{Session::get('error')}}
 		</div>
-	</div>
-
-	{{-- size_chart model start here--}}
-	<div class="modal fade" id="size_chart" role="dialog" tabindex='-1'>
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content address-modal">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Size Chart</h4>
-				</div>
-				<div class="modal-body">
-					<div style="text-align: center;" class="sizechartDiv">
-						@if($product->size_chart_type =="image" && $product->size_chart_image != null)
-							<img src="{{ URL::asset('uploads/sizechart/'.$product->id.'/500x500/'.$product->size_chart_image)}}" alt="sizechart"  align="center">
-						@elseif($product->size_chart_type =="desc" && $product->size_chart_description!=null)
-
-							<p>{!! $product->size_chart_description !!}</p>
-						@else
-							<P>Not Present !!</P>
-						@endif
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	{{-- size_chart model ends here--}}
-
-	{{--change stock_model model start here--}}
-	<div class="modal fade" id="stock_model" role="dialog" tabindex='-1'>
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content address-modal">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Stock Availability</h4>
-				</div>
-				<div class="modal-body">
-					<ul class="address-List stock-modal">
-						<div class="stock-available" style="text-align: center;">
-							@if(count($pConfiguration)>0)
-								<table class="stock-table" cellspacing="1" cellpadding="1">
-									<thead>
-									<tr>
-										<th>Color</th>
-										<th>Size</th>
-										<th>Status</th>
-									</tr>
-									</thead>
-									<tbody>
-									@foreach($pConfiguration as $config)
-										<tr>
-											<td>@if($config->AttributeColor['name']!= null){{$config->AttributeColor['name']}}@else NA @endif</td>
-											<td>@if($config->AttributeSize['name']!= null){{$config->AttributeSize['name']}}@else NA @endif</td>
-											<td>@if($config->quantity >0 )<span style="color:green;"> In stock </span> @else <span style="color:red;">Out of stock</span> @endif</td>
-										</tr>
-									@endforeach
-									</tbody>
-								</table>
-							@else
-								<table class="stock-table" cellspacing="1" cellpadding="1">
-									<thead>
-									<tr><th>Product Total Quantity</th></tr>
-									</thead>
-									<tbody>
-									<tr><td>{{$product->quantity}}</td></tr>
-									</tbody>
-								</table>
-							@endif
-						</div>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	{{--change stock_model model ends here--}}
-
-	@if($product->video_url!=null)
-	{{--youtube model start here--}}
-	<div class="modal fade" id="youtube_video" role="dialog" tabindex='-1'>
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content youtube-modal">
-				<div class="modal-header">
-					<button type="button" id="youtube_button_close" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Watch Youtube Video</h4>
-				</div>
-				<div class="modal-body">
-					<?php $videoData = preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $product->video_url, $match);$youtube_id = $match[1]; ?>
-					<iframe id="youtube_player" width="100%" height="345" src="https://www.youtube.com/embed/{{$youtube_id}}?rel=0" allowfullscreen></iframe>
-				</div>
-			</div>
-		</div>
-	</div>
-	{{--youtube model ends here--}}
 	@endif
-<div id="productZoom"></div>{{--product zoom div--}}
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="{{asset("js/jquery.zoom.js")}}"></script>
-	<script>
-        var clickTimer;
-        $('.static-right-content > div').on('touchstart',function(){
-            clearTimeout(clickTimer);
-            $(".mob-menu").removeClass("show");
-            $(".mob-menu").addClass("hide");
-            $(".nav").addClass('hide');
-            $(".nav").removeClass("show");
-            $(this).addClass('tray').siblings().removeClass('tray');
-            clickTimer=setTimeout(function(){$('.static-right-content div').removeClass('tray')},7000)
-        });
-        $('body').on('touchstart',function(e){var _tray=$(e.target).parents('.static-right-content').length; if(_tray>0){return false}$('.static-right-content div').removeClass('tray')});
-	</script>
-	<script>
-        $( function() {
-            $( "#tab-list" ).tabs();
-        } );
-		/*closing error msg after 5 sec time*/
-        $(function() {
-            // setTimeout() function will be fired after page is loaded
-            // it will wait for 5 sec. and then will fire
-            // $("#successMessage").hide() function
-            setTimeout(function() {
-                $("#errorMessage").hide('blind', {}, 500)
-            }, 5000);
-        });
-	</script>	
-	<script  type="text/javascript" src="{{asset("js/product-detail-page.js")}}"></script>
+	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	<input type="hidden" name="pid" id="pid" value="{{$product->id}}">
+	
+	<div class="container">
+		<div class="row">
+            <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+              <div class="product-image">
+                    <div class="product_img_box">
+                    	@if(count($productConfiguration) >0)
+                    		@foreach($productConfiguration as $pConfig)
+                    			@if($pConfig->config_img != null)
+		                        <img id="product_img" src="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" data-zoom-image="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" alt="product_img1" />
+		                        <a href="#" class="product_img_zoom" title="Zoom">
+		                            <span class="linearicons-zoom-in"></span>
+		                        </a>
+                            	@endif
+                            @endforeach
+                        @endif
+                    </div>
+                    <div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
+					
+                    <?php $i = 0; ?>
+					@if(count($productConfiguration) >0)
+						@foreach($productConfiguration as $pConfig)
+							@if($pConfig->config_img != null)
+	                        <div class="item">
+	                        	@if( $i == 1 )
+	                            <a href="#" class="product_gallery_item active" data-image="{{$pConfig->config_img}}" data-zoom-image="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" data-config="{{$pConfig->color_id}}" data-val="{{$pConfig->config_img}}">
+	                            @else 
+	                            <a href="#" class="product_gallery_item" data-image="{{$pConfig->config_img}}" data-zoom-image="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" data-config="{{$pConfig->color_id}}" data-val="{{$pConfig->config_img}}">
+	                            @endif
+	                                <img src="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/80x85/'.$pConfig->config_img)}}" alt="product_small_img1" />
+	                            </a>
+	                        </div>
+							@endif
+						@endforeach
+					@endif
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+				@if($product->icon!=null)
+				<span class="pr_flash"><img src="/uploads/product_icon/{{$product->id}}/{{$product->icon}}"></span>
+				@endif
+                <div class="pr_detail">
+                    <div class="product_description">
+                        <h4 class="product_title">{{$product->name}}</h4>
+	                    <hr />
+	                    <ul class="product-meta">
+	                        <li>SKU: {{$product->sku}}</li>
+	                        <li>Brand: {{$brandName->name}} </li>
+	                    </ul>
+                        <div class="product_price">
+                            <span class="price"> ₹ {{number_format($finalprice,2)}}</span>
+                            @if($product->price!=$finalprice)
+                            	<del> ₹ {{number_format($product->price,2)}} </del>
+                            @endif
+                            <div class="on_sale">
+                            	<?php  
+                            		$offRate = ($product->price - $finalprice) * 100 / $product->price;
+                            	?>
+                                <span>{{ $offRate }}% Off</span>
+                            </div>
+                        </div>
+                        <?php 
+                        	$ratingAvg = $ratingAvg * 100 / 5;
+                        ?>
+                        <div class="rating_wrap">
+                            <div class="rating">
+                            	@if($totalRatings>0)
+                            	<?php echo '<div class="product_rate" style="width:'.$ratingAvg.'%;"></div>' ?>
+                            	@else
+                            	<div class="product_rate" style="width:0%;"></div>
+                            	@endif
+                                <!-- <div class="product_rate" style="width: $ratingAvg %"></div> -->
+                            </div>
+                            <span class="rating_num">({{$totalRatings}} reviews)</span>
+							@if($product->video_url!=null)
+								<div class="you_tube"><img src="/images/you_tube.png" alt="you tube">
+									<a id="youtube"  data-toggle="modal" data-target="#youtube_video" data-keyboard="true" href="#">Click to watch product video</a>
+								</div>
+							@endif
+                        </div>
+
+                        <div class="pr_desc">
+                            <p>{!! nl2br(e($product->short_description)) !!}</p>
+                        </div>
+                        <div class="product_sort_info">
+                            <ul>
+                                <li><i class="linearicons-shield-check"></i> 1 Year Warranty</li>
+                                <li><i class="linearicons-sync"></i> 30 Day Return Policy</li>
+                                <li><i class="linearicons-bag-dollar"></i> Cash on Delivery available</li>
+                            </ul>
+                        </div>
+                        <div class="pr_switch_wrap">
+                            <span class="switch_lable">Color</span>
+                            <div class="product_color_switch">
+                                <span class="active" data-color="#87554B"></span>
+                                <span data-color="#333333"></span>
+                                <span data-color="#DA323F"></span>
+                            </div>
+                        </div>
+                        <div class="pr_switch_wrap">
+                        	@if(count($getattributesSize)>=1)
+                        	<input type="hidden" name="selectedSize" id="selectedSize" value="@if(count($getattributesSize)== 1) {{$getattributesSize[0]->AttributeSize}} @endif">
+                            <span class="switch_lable">Size</span>
+                            <div class="product_size_switch">
+                            	@foreach($getattributesSize as $size)
+                            	<span class="sizeselect @if($size->quantity >0)@else outstockSize @endif" data-val="{{$size->AttributeSize}}">{{$size->name}}</span>
+                            	@endforeach
+                            </div>
+	                        @endif
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="cart_extra">
+                        <div class="cart-product-quantity">
+                            <div class="quantity">
+                                <input type="button" value="-" class="minus">
+                                <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                <input type="button" value="+" class="plus">
+                            </div>
+                        </div>
+                        <div class="cart_btn">
+                            <button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Add to cart</button>
+                            <a class="add_compare" href="#"><i class="icon-shuffle"></i></a>
+                            <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-12">
+            	<div class="large_divider clearfix"></div>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-12">
+            	<div class="tab-style3">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">Description</a>
+                      	</li>
+                      	<li class="nav-item">
+                        	<a class="nav-link" id="Additional-info-tab" data-toggle="tab" href="#Additional-info" role="tab" aria-controls="Additional-info" aria-selected="false">Additional info</a>
+                      	</li>
+                      	<li class="nav-item">
+                        	<a class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">Reviews (2)</a>
+                      	</li>
+                    </ul>
+                	<div class="tab-content shop_info_tab">
+                      	<div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
+                        	<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Vivamus bibendum magna Lorem ipsum dolor sit amet, consectetur adipiscing elit.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+                        	<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                      	</div>
+                      	<div class="tab-pane fade" id="Additional-info" role="tabpanel" aria-labelledby="Additional-info-tab">
+                        	<table class="table table-bordered">
+                            	<tr>
+                                	<td>Capacity</td>
+                                	<td>5 Kg</td>
+                            	</tr>
+                                <tr>
+                                    <td>Color</td>
+                                    <td>Black, Brown, Red,</td>
+                                </tr>
+                                <tr>
+                                    <td>Water Resistant</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>Material</td>
+                                    <td>Artificial Leather</td>
+                                </tr>
+                        	</table>
+                      	</div>
+                      	<div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
+                        	<div class="comments">
+                            	<h5 class="product_tab_title">2 Review For <span>Blue Dress For Woman</span></h5>
+                                <ul class="list_none comment_list mt-4">
+                                    <li>
+                                        <div class="comment_img">
+                                            <img src="assets/images/user1.jpg" alt="user1"/>
+                                        </div>
+                                        <div class="comment_block">
+                                            <div class="rating_wrap">
+                                                <div class="rating">
+                                                    <div class="product_rate" style="width:80%"></div>
+                                                </div>
+                                            </div>
+                                            <p class="customer_meta">
+                                                <span class="review_author">Alea Brooks</span>
+                                                <span class="comment-date">March 5, 2018</span>
+                                            </p>
+                                            <div class="description">
+                                                <p>Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment_img">
+                                            <img src="assets/images/user2.jpg" alt="user2"/>
+                                        </div>
+                                        <div class="comment_block">
+                                            <div class="rating_wrap">
+                                                <div class="rating">
+                                                    <div class="product_rate" style="width:60%"></div>
+                                                </div>
+                                            </div>
+                                            <p class="customer_meta">
+                                                <span class="review_author">Grace Wong</span>
+                                                <span class="comment-date">June 17, 2018</span>
+                                            </p>
+                                            <div class="description">
+                                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                        	</div>
+                            <div class="review_form field_form">
+                                <h5>Add a review</h5>
+                                <form class="row mt-3">
+                                    <div class="form-group col-12">
+                                        <div class="star_rating">
+                                            <span data-value="1"><i class="far fa-star"></i></span>
+                                            <span data-value="2"><i class="far fa-star"></i></span> 
+                                            <span data-value="3"><i class="far fa-star"></i></span>
+                                            <span data-value="4"><i class="far fa-star"></i></span>
+                                            <span data-value="5"><i class="far fa-star"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <textarea required="required" placeholder="Your review *" class="form-control" name="message" rows="4"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input required="required" placeholder="Enter Name *" class="form-control" name="name" type="text">
+                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <input required="required" placeholder="Enter Email *" class="form-control" name="email" type="email">
+                                    </div>
+                                   
+                                    <div class="form-group col-12">
+                                        <button type="submit" class="btn btn-fill-out" name="submit" value="Submit">Submit Review</button>
+                                    </div>
+                                </form>
+                            </div>
+                      	</div>
+                	</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-12">
+            	<div class="small_divider"></div>
+            	<div class="divider"></div>
+                <div class="medium_divider"></div>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-12">
+            	<div class="heading_s1">
+                	<h3>Releted Products</h3>
+                </div>
+            	<div class="releted_product_slider carousel_slider owl-carousel owl-theme" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
+                	<div class="item">
+                        <div class="product">
+                            <div class="product_img">
+                                <a href="shop-product-detail.html">
+                                    <img src="assets/images/product_img1.jpg" alt="product_img1">
+                                </a>
+                                <div class="product_action_box">
+                                    <ul class="list_none pr_action_btn">
+                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                        <li><a href="shop-compare.html"><i class="icon-shuffle"></i></a></li>
+                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                        <li><a href="#"><i class="icon-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product_info">
+                                <h6 class="product_title"><a href="shop-product-detail.html">Blue Dress For Woman</a></h6>
+                                <div class="product_price">
+                                    <span class="price">$45.00</span>
+                                    <del>$55.25</del>
+                                    <div class="on_sale">
+                                        <span>35% Off</span>
+                                    </div>
+                                </div>
+                                <div class="rating_wrap">
+                                    <div class="rating">
+                                        <div class="product_rate" style="width:80%"></div>
+                                    </div>
+                                    <span class="rating_num">(21)</span>
+                                </div>
+                                <div class="pr_desc">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                </div>
+                                <div class="pr_switch_wrap">
+                                    <div class="product_color_switch">
+                                        <span class="active" data-color="#87554B"></span>
+                                        <span data-color="#333333"></span>
+                                        <span data-color="#DA323F"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="product">
+                            <div class="product_img">
+                                <a href="shop-product-detail.html">
+                                    <img src="assets/images/product_img2.jpg" alt="product_img2">
+                                </a>
+                                <div class="product_action_box">
+                                    <ul class="list_none pr_action_btn">
+                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                        <li><a href="shop-compare.html"><i class="icon-shuffle"></i></a></li>
+                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                        <li><a href="#"><i class="icon-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product_info">
+                                <h6 class="product_title"><a href="shop-product-detail.html">Lether Gray Tuxedo</a></h6>
+                                <div class="product_price">
+                                    <span class="price">$55.00</span>
+                                    <del>$95.00</del>
+                                    <div class="on_sale">
+                                        <span>25% Off</span>
+                                    </div>
+                                </div>
+                                <div class="rating_wrap">
+                                    <div class="rating">
+                                        <div class="product_rate" style="width:68%"></div>
+                                    </div>
+                                    <span class="rating_num">(15)</span>
+                                </div>
+                                <div class="pr_desc">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                </div>
+                                <div class="pr_switch_wrap">
+                                    <div class="product_color_switch">
+                                        <span class="active" data-color="#847764"></span>
+                                        <span data-color="#0393B5"></span>
+                                        <span data-color="#DA323F"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="product">
+                            <span class="pr_flash">New</span>
+                            <div class="product_img">
+                                <a href="shop-product-detail.html">
+                                    <img src="assets/images/product_img3.jpg" alt="product_img3">
+                                </a>
+                                <div class="product_action_box">
+                                    <ul class="list_none pr_action_btn">
+                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                        <li><a href="shop-compare.html"><i class="icon-shuffle"></i></a></li>
+                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                        <li><a href="#"><i class="icon-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product_info">
+                                <h6 class="product_title"><a href="shop-product-detail.html">woman full sliv dress</a></h6>
+                                <div class="product_price">
+                                    <span class="price">$68.00</span>
+                                    <del>$99.00</del>
+                                </div>
+                                <div class="rating_wrap">
+                                    <div class="rating">
+                                        <div class="product_rate" style="width:87%"></div>
+                                    </div>
+                                    <span class="rating_num">(25)</span>
+                                </div>
+                                <div class="pr_desc">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                </div>
+                                <div class="pr_switch_wrap">
+                                    <div class="product_color_switch">
+                                        <span class="active" data-color="#333333"></span>
+                                        <span data-color="#7C502F"></span>
+                                        <span data-color="#2F366C"></span>
+                                        <span data-color="#874A3D"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="product">
+                            <div class="product_img">
+                                <a href="shop-product-detail.html">
+                                    <img src="assets/images/product_img4.jpg" alt="product_img4">
+                                </a>
+                                <div class="product_action_box">
+                                    <ul class="list_none pr_action_btn">
+                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                        <li><a href="shop-compare.html"><i class="icon-shuffle"></i></a></li>
+                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                        <li><a href="#"><i class="icon-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product_info">
+                                <h6 class="product_title"><a href="shop-product-detail.html">light blue Shirt</a></h6>
+                                <div class="product_price">
+                                    <span class="price">$69.00</span>
+                                    <del>$89.00</del>
+                                    <div class="on_sale">
+                                        <span>20% Off</span>
+                                    </div>
+                                </div>
+                                <div class="rating_wrap">
+                                    <div class="rating">
+                                        <div class="product_rate" style="width:70%"></div>
+                                    </div>
+                                    <span class="rating_num">(22)</span>
+                                </div>
+                                <div class="pr_desc">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                </div>
+                                <div class="pr_switch_wrap">
+                                    <div class="product_color_switch">
+                                        <span class="active" data-color="#333333"></span>
+                                        <span data-color="#A92534"></span>
+                                        <span data-color="#B9C2DF"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="product">
+                            <div class="product_img">
+                                <a href="shop-product-detail.html">
+                                    <img src="assets/images/product_img5.jpg" alt="product_img5">
+                                </a>
+                                <div class="product_action_box">
+                                    <ul class="list_none pr_action_btn">
+                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                        <li><a href="shop-compare.html"><i class="icon-shuffle"></i></a></li>
+                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                        <li><a href="#"><i class="icon-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product_info">
+                                <h6 class="product_title"><a href="shop-product-detail.html">blue dress for woman</a></h6>
+                                <div class="product_price">
+                                    <span class="price">$45.00</span>
+                                    <del>$55.25</del>
+                                    <div class="on_sale">
+                                        <span>35% Off</span>
+                                    </div>
+                                </div>
+                                <div class="rating_wrap">
+                                    <div class="rating">
+                                        <div class="product_rate" style="width:80%"></div>
+                                    </div>
+                                    <span class="rating_num">(21)</span>
+                                </div>
+                                <div class="pr_desc">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                </div>
+                                <div class="pr_switch_wrap">
+                                    <div class="product_color_switch">
+                                        <span class="active" data-color="#87554B"></span>
+                                        <span data-color="#333333"></span>
+                                        <span data-color="#5FB7D4"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SECTION SHOP -->
+
+</div>
+<!-- END MAIN CONTENT -->
+
+<script  type="text/javascript" src="{{asset('js/product-detail-page.js')}}"></script>
 @endsection
