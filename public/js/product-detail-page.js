@@ -1,16 +1,16 @@
-
-var userAgent=window.navigator.userAgent;
-var isMobile=/iPhone|iPad|android/i.test(userAgent);
-console.log(isMobile)
-var options={on:isMobile?'click':'mouseover',touch:isMobile?false:true}
-    $('#ex3').zoom(options);
-
 $(document).ready(function(){
    
-    if($(".colorselect").length == 1)
-	{
+    if($(".colorselect").length == 1) {
         $(".colorselect").addClass('selColorInit');
 	}
+
+    $(document).on('click', '.add_review_star', function() {
+        var elem = $(this);
+        var num_stars = elem.attr('data-value');
+        $('#rating').val(num_stars);
+    });
+
+
 });
 /*// display w.r.t sizes available on select color
     $('.colorselect').click(function () {
@@ -246,7 +246,6 @@ $(document).ready(function(){
 
         });
 
-console.log(subtotalAfterDiscount);
 
     });
     $(".input-number").keydown(function (e) {

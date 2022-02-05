@@ -1,90 +1,120 @@
-<style>
-  .alert {
-     padding: 2px !important;
-  }
-  .modal-footer {
-       display: block; !important;
-  }
 
-  .modal-content {
-       min-height: auto; !important;
-      overflow-y: auto; !important;
-  }
-
-</style>
-
-<div class="content">
-  <div class="container">
-    <div class="loginMiddle">
-      <div class="middleCard">
-        <h1 class="title">{{ $cmsPage['page_title'] }}</h1>
-        <form class="login" id="frmRegister" action="#" method="post" name="frmRegister">
-          <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
-          <div class="row paraRow">
-            {!! $cmsPage['description']!!}
-          </div>
-          <div class="row">
-            <label>First Name<span>*</span></label>
-            <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" required minlength="3">
-            <div class="bar"></div>
-            <div class="alert alert-danger" style="display: none" id="fname_val">
-
+<!-- START SECTION BREADCRUMB -->
+<div class="breadcrumb_section bg_gray page-title-mini">
+    <div class="container"><!-- STRART CONTAINER -->
+        <div class="row align-items-center">
+          <div class="col-md-6">
+                <div class="page-title">
+                <h1>{{ $cmsPage['page_title'] }}</h1>
+                </div>
             </div>
-          </div>
-          <div class="row">
-            <label>Last Name<span>*</span></label>
-            <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" required minlength="3">
-            <div class="bar"></div>
-            <div class="alert alert-danger" style="display: none"  id="lname_val">
+            <div class="col-md-6">
+                <ol class="breadcrumb justify-content-md-end">
+                    <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
+                    <li class="breadcrumb-item active">{{ $cmsPage['page_title'] }}</li>
+                </ol>
             </div>
-          </div>
-            <div class="row">
-                <label>MOBILE number:<span>*</span></label>
-                <input type="text" name="phone" id="phone" value="{{ old('phone') }}" required minlength="10" maxlength="10">
-                <div class="bar"></div>
-                <div style="position: absolute;margin-top: 5px;" id="phone_msg">Enter your 10 digit mobile number</div>
-                <div class="alert alert-danger" style="display: none" id="phone_val"></div>
-            </div>
-
-          <div class="row">
-            <label>Email<span>*</span></label>
-            <input type="email" name="email_address" id="email_address" value="{{ old('email_address') }}" required minlength="3">
-            <div class="bar"></div>
-            <div class="alert alert-danger" style="display: none" id="email_val">
-            </div>
-          </div>
-          <div class="row">
-            <label>Password<span>*</span></label>
-            <input type="password" name="password" id="password" minlength="5" required>
-            <div class="bar"></div>
-            <div class="alert alert-danger" style="display: none" id="pass_val">
-
-            </div>
-          </div>
-          <div class="row">
-            <label>Re-Enter Password<span>*</span></label>
-            <input type="password" name="re_password" id="re-password" minlength="5" required>
-            <div class="bar"></div>
-            <div class="alert alert-danger" style="display: none" id="cpass_val">
-
-            </div>
-            <div class="alert alert-danger" style="display: none" id="pAndCPass_val">
-
-            </div>
-          </div>
-          <div class="row subBtn">
-            <br/>
-            <button type="submit" id="submit"><span>Submit</span></button>
-          </div>
-          <div class="row  btnRow">
-            <a href="{{  url('/login') }}">Back To Login</a>
-          </div>
-
-        </form>
-      </div>
-    </div>
-  </div>
+        </div>
+    </div><!-- END CONTAINER-->
 </div>
+<!-- END SECTION BREADCRUMB -->
+
+
+<!-- START MAIN CONTENT -->
+<div class="main_content">
+
+    <div  class="row mt-3">
+        <div class="col-lg-6 col-md-8 col-sm-12 form-container">
+            <div class="successAlert">
+                @if(Session::has('success'))
+                    <div class="confirmBox" id="confirmBox">
+                        <div class="message"> 
+                          {{Session::get('success')}}
+                        </div>
+                    </div>
+                @endif
+                <form class="row mt-3" id="frmRegister" action="#" method="post" name="frmRegister">
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                    <div class="col-12 paraRow">
+                        {!! $cmsPage['description']!!}
+                    </div>
+
+                    <div class="col-12 form-group">
+                        <label for="first_name">
+                            First Name
+                            <span>*</span>
+                        </label>
+                        <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" required minlength="3">
+                        <div class="alert alert-danger" style="display: none" id="fname_val"></div>
+                    </div>
+                    
+
+                    <div class="col-12 form-group">
+                        <label for="last_name">
+                            Last Name
+                            <span>*</span>
+                        </label>
+                        <input class="form-control" type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" required minlength="3">
+                        <div class="alert alert-danger" style="display: none" id="lname_val"></div>
+                    </div>
+                    
+
+                    <div class="col-12 form-group">
+                        <label for="last_name">
+                            MOBILE number : 
+                            <span>*</span>
+                        </label>
+                        <input class="form-control" type="text" name="phone" id="phone" value="{{ old('phone') }}" required minlength="10" maxlength="10">
+                        <div class="alert alert-danger" style="display: none" id="phone_val"></div>
+                    </div>
+                    
+
+
+                    <div class="col-12 form-group">
+                        <label for="email_address">
+                            Email Address
+                            <span>*</span>
+                        </label>
+                        <input class="form-control" type="email" name="email_address" id="email_address" value="{{ old('email_address') }}" required minlength="3">
+                        <div class="alert alert-danger" style="display: none" id="email_val"></div>
+                    </div>
+                    
+
+                    <div class="col-12 form-group">
+                        <label for="password">
+                            Password
+                            <span>*</span>
+                        </label>
+                        <input class="form-control" type="password" name="password" id="password"  minlength="5" required>
+                        <div class="alert alert-danger" style="display: none" id="pass_val"></div>
+                    </div>
+                    
+
+                    <div class="col-12 form-group">
+                        <label for="password">
+                            Re-Enter Password
+                            <span>*</span>
+                        </label>
+                        <input class="form-control" type="password" name="re_password" id="re_password"  minlength="5" required>
+                        <div class="alert alert-danger" style="display: none" id="cpass_val"></div>
+                        <div class="alert alert-danger" style="display: none" id="pAndCPass_val"></div>
+                    </div>
+
+
+
+                    <div class="form-group col-12">
+                        <input class="btn btn-fill-out form-control" type="submit" id="submit" name="submitBtn" value="Submit">
+                    </div>
+                    <div class="form-group col-12 register-forgot">
+                        <a href="{{  url('/login') }}">Back To Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- END MAIN CONTENT -->
 
 <!-- Register model starts -->
 
@@ -125,16 +155,23 @@
     </div>
 </div>
 <!-- Register model ends -->
+
 <!-- Added notification msg library by Akshay Patil on 27th Nov 2018-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Added notification msg library-->
+
 <script type="text/javascript">
-    $(window).load(function() {
-        $('#confirmBox').delay(10000).fadeOut();
-    });
-    $("#submit").click(function () {
+$(document).ready(function() {
+   
+    // $(window).load(function() {
+    //     
+    // });
+    $('#confirmBox').delay(10000).fadeOut();
+
+    $("#submit").on('click', function (e) {
+        e.preventDefault();
         var first_name = document.forms["frmRegister"]["first_name"];
         var last_name = document.forms["frmRegister"]["last_name"];
         var email_address = document.forms["frmRegister"]["email_address"];
@@ -204,7 +241,12 @@
             type: "POST",
             headers: {'X-CSRF-TOKEN': token},
             url: "/send-otp",
-            data: {"mobile":phone.value,"email_address":email_address.value,"first_name":first_name.value,"last_name":last_name.value},
+            data: { 
+                "mobile":phone.value,
+                "email_address":email_address.value,
+                "first_name":first_name.value,
+                "last_name":last_name.value
+            },
             success: function (data) {
                 if(data.status == "200"){
                    $("#submit_otp").click();
@@ -233,6 +275,7 @@
         });
         return false;
     });
+
     $("#submit_otp").click(function () {
         var values = {};
         $.each($('#frmRegister').serializeArray(), function(i, field) {
@@ -274,4 +317,7 @@
             }
         });
     });
+});
+
+ 
 </script>
