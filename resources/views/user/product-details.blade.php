@@ -53,6 +53,7 @@
 		                        <a href="#" class="product_img_zoom" title="Zoom">
 		                            <span class="linearicons-zoom-in"></span>
 		                        </a>
+								@break
                             	@endif
                             @endforeach
                         @endif
@@ -65,9 +66,9 @@
 							@if($pConfig->config_img != null)
 	                        <div class="item">
 	                        	@if( $i == 1 )
-	                            <a href="#" class="product_gallery_item active" data-image="{{$pConfig->config_img}}" data-zoom-image="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" data-config="{{$pConfig->color_id}}" data-val="{{$pConfig->config_img}}">
+	                            <a href="#" class="product_gallery_item active" data-image="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" data-zoom-image="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" data-config="{{$pConfig->color_id}}" data-val="{{$pConfig->config_img}}">
 	                            @else 
-	                            <a href="#" class="product_gallery_item" data-image="{{$pConfig->config_img}}" data-zoom-image="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" data-config="{{$pConfig->color_id}}" data-val="{{$pConfig->config_img}}">
+	                            <a href="#" class="product_gallery_item" data-image="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" data-zoom-image="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/1024x1024/'.$pConfig->config_img)}}" data-config="{{$pConfig->color_id}}" data-val="{{$pConfig->config_img}}">
 	                            @endif
 	                                <img src="{{URL::asset('uploads/products/images/'.$pConfig->product_id.'/80x85/'.$pConfig->config_img)}}" alt="product_small_img1" />
 	                            </a>
