@@ -73,9 +73,34 @@
                     </form>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
-                    <li><a href="#" class="nav-link"><i class="linearicons-user"></i></a></li>
+                    <!-- <li><a href="#" class="nav-link"><i class="linearicons-user"></i></a></li> -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="linearicons-user"></i></a>
+                        <div class="dropdown-menu">
+                            <ul> 
+                            <?php $user = \Illuminate\Support\Facades\Auth::user(); ?>
+                            @if($user==null)
+                                <li><a class="dropdown-item nav-link nav_item" href="/login">Login</a></li>
+                                <li><a class="dropdown-item nav-link nav_item" href="/register">Register</a></li>
+                            @elseif($user!=null)
+                                <li><a class="dropdown-item nav-link nav_item" href="/order/list">Your Orders</a></li>
+                                <li><a class="dropdown-item nav-link nav_item" href="/address">Your Addresses</a></li>
+                                <li><a class="dropdown-item nav-link nav_item" href="/my-profile">Your Profile</a></li>
+                                <li><a class="dropdown-item nav-link nav_item" href="/change-password">Change Password</a></li>
+                                <li><a class="dropdown-item nav-link nav_item" href="/logout">Logout</a></li>
+                            @endif
+                            </ul>
+                        </div>   
+                    </li>
                     <li><a href="#" class="nav-link"><i class="linearicons-heart"></i><span class="wishlist_count">0</span></a></li>
-                    <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-bag2"></i><span class="cart_count">2</span><span class="amount"><span class="currency_symbol">$</span>159.00</span></a>
+                    <li class="dropdown cart_dropdown">
+                        <a class="nav-link cart_trigger" href="#" data-toggle="dropdown">
+                            <i class="linearicons-bag2"></i>
+                            <span class="cart_count">2</span>
+                            <span class="amount">
+                                <span class="currency_symbol">$</span>159.00
+                            </span>
+                        </a>
                         <div class="cart_box cart_right dropdown-menu dropdown-menu-right">
                             <ul class="cart_list">
                                 <li>
