@@ -169,6 +169,8 @@ class SearchController extends Controller
       }
     }
 
+
+
     public function getInnerCategory($catID) {
         $category = Category::select('id', 'name', 'level_id','slug')
             ->where([["parent_id", $catID], ["is_active", "Y"]])
@@ -180,6 +182,8 @@ class SearchController extends Controller
         });
         return $category;
     }
+
+
 
     public function filterSearch(Request $request){
         try{
@@ -232,43 +236,130 @@ class SearchController extends Controller
             $pagination = $products->links();
             $ds = DIRECTORY_SEPARATOR;
             $productData = null;
+
+
             foreach($products as $product) {
                 /*'uploads/products/images/'.$product->id.'/1024x1024/'.$product->image*/
                 $filePath = $ds . "uploads" . $ds . "products" . $ds . "images" . $ds . $product['id'] . $ds. "250x250". $ds . $product['image'];
                 $fileFullPath = public_path().$ds . "uploads" . $ds . "products" . $ds . "images" . $ds . $product['id'] . $ds. "250x250". $ds . $product['image'];
                 $price = number_format($product->price-$product->discount_price,2);
                 $offer = $offer = ProductsOffers::join("offers","products_offers.offer_id","=","offers.id")->where("offers.is_active","Y")->where("product_id",$product->id)->first();
-                $productData .= "<li>";
-                if (file_exists($fileFullPath))
-                    $productData .= "<div class='imgWrp'><a href='/product/details/$product->slug'><img src='$filePath' alt='product'></a></div>";
-                else
-                    $productData .= "<div class='imgWrp'><a href='/product/details/$product->slug'><img src='/images/no-image-available.png' alt='product'></a></div>";
-                $productData .= "<div class='content-Right'>";
-                if($product->icon!=null){
-                    $productData .= "<div class='justarrive'><img src='/uploads/product_icon/$product->id/$product->icon'></div>";
-                }
-                $productData .= "<div class='textData'><h4><a href='/product/details/$product->slug'>$product->name</a></h4><p>$product->name</p>";
-                if($product->price!=$product->price-$product->discount_price){
-                    $originalPrice =  number_format($product->price,2);
-                    $productData .= "<h5 class='strike-span'> &#8377 $originalPrice</h5></div>";
-                }
-                $productData .= "<p><span> &#8377 $price</span></p></div>";
-                $productData .= "<div class='item-offer'>";
-                if($offer!=null){
-                    $pName = $offer['name'];
-                    $discount = $offer['discount'];
-                    $productData .= "<h3>$pName</h3><span class='off-dis'>($discount% OFF)</span><p>*Any color</p>";
-                }
-                if($product['video_url']!=null){
-                    $vURL = $product['video_url'];
-                    $productData .= "<a class='playI' data-vid='$vURL' id='youtube'  data-toggle='modal' data-target='#youtube_video' data-keyboard='true' href='#'>";
-                    $productData .= "<img src='/images/you_tube.png'><p>Click to watch product video</p></a>";
-                }
-                $productData .="</div><div class='view-add'><div class='quickview'><a href='/product/details/$product->slug' class='view'></a><a href='/product/details/$product->slug' class='addLink'>Shop Now</a><a href='/product/details/$product->slug'><input type='button' value='Shop Now' class='add-button'></a></div></div></div>";
-                /*product offers div ends*/
 
-                $productData .= "<div class='view-add'><div class='quickview'><a href='/product/details/$product->slug' class='view'></a><a href='/product/details/$product->slug' class='addLink'>Shop Now</a><a href='/product/details/$product->slug'><input type='button' value='Shop Now' class='add-button'></a></div></div></div>";
+                // begin product container
+                $productData .= '<div class="col-md-4 col-6">';
+
+                // begin product
+                $productData .= '<div class="product">';
+                if ( $product->icon!= null ) {
+                    $productData .= '<span class="pr_flash">';
+                    $productData .= "<img src='/uploads/product_icon/".$product->id."/".$product->icon."'>";
+                    $productData .= '</span>';
+                }
+
+                // begin product_img
+                $productData .= '<div class="product_img">';
+                if (file_exists($fileFullPath))
+                    $productData .= '<a href="/product/details/'.$product->slug.'"><img src="'.$filePath.'" alt="product"></a>';
+                else
+                    $productData .= '<a href="/product/details/'.$product->slug.'"><img src="/images/no-image-available.png" alt="product"></a>';
+
+                $productData .= '<div class="product_action_box">
+                                        <ul class="list_none pr_action_btn">
+                                            <li class="add-to-cart"><a href="javascript:"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                            <li><a href="javascript:" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
+                                            <li><a href="javascript:" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                            <li><a href="javascript:"><i class="icon-heart"></i></a></li>
+                                        </ul>
+                                 </div>';
+
+                $productData .= '</div>';   
+                // end of product_img
+
+                // begin product_info
+                $productData .= '<div class="product_info">';
+
+                    // begin product_title
+                    $productData .= '<h6 class="product_title"><a href="/product/details/$product->slug">'.$product->name.'</a></h6>';
+                    // end product_title
+
+                    // begin product_price
+                    $productData .= '<div class="product_price">';
+
+                    $priceVal = number_format(($product->price - $product->discount_price),2);
+                    $productData .= ('<span class="price"> &#8377 '.$priceVal.'</span>');
+
+                    if($product->price!=$product->price-$product->discount_price){
+                        $originalPrice =  number_format($product->price,2);
+                        $productData .= ('<del>&#8377 '.$originalPrice.'</del>');
+                        $productData .= '<div class="on_sale">';
+                        if($product->offer!=null) {
+                            $offerDis = $product->offer['discount'];
+                            $productData .= '<span>( $offerDis OFF )</span>
+                                                <p>*Any color</p>';
+                        }
+                        $productData .= '</div>';
+                    }
+
+                    $productData .= '</div>';
+                    // end product_price
+
+
+                    // begin rating_wrap
+                    $productData .= '<div class="rating_wrap">
+                                            <div class="rating">
+                                                <div class="product_rate" style="width:100%"></div>
+                                            </div>
+                                            <span class="rating_num"></span>
+                                    </div>';
+                    // end rating_wrap
+
+                    // begin pr_desc
+                    $productData .= '<div class="pr_desc">';
+                    if($product['video_url']!=null){
+                        $vURL = $product['video_url'];
+                        $productData .= "<a class='playI' data-vid='$vURL' id='youtube'  data-toggle='modal' data-target='#youtube_video' data-keyboard='true' href='#'>";
+                        $productData .= "<img src='/images/you_tube.png'><p>Click to watch product video</p></a>";
+                    }
+
+                    $productData .= "<p>$product->short_description</p>";
+                    $productData .= '</div>';
+                    // end pr_desc
+
+                    // begin pr_switch_wrap
+                    // $productData .= '<div class="pr_switch_wrap">
+                    //                         <div class="product_color_switch">
+                    //                             <span class="active" data-color="#87554B"></span>
+                    //                             <span data-color="#333333"></span>
+                    //                             <span data-color="#DA323F"></span>
+                    //                         </div>
+                    //                     </div>';
+                    // end pr_switch_wrap
+
+                    // begin list_product_action_box
+                    $productData .= '<div class="list_product_action_box">
+                                            <ul class="list_none pr_action_btn">
+                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
+                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                                <li><a href="#"><i class="icon-heart"></i></a></li>
+                                            </ul>
+                                        </div>';
+                    // end list_product_action_box
+
+                $productData .= '</div>';
+                // end product_info
+
+                $productData .= '</div>';
+                // end product
+
+                $productData .= '</div>';
+                // end product container
             }
+            
+            if ( $productData === null ) {
+                $productData ='<div class="col-md-4 col-6"><h1 style="color: #0b3e6f">Sorry! No products found for this filter range.</h1></div>';
+            }
+
             $pagination = "$pagination";
             $finalData = [
                 'links'=>$pagination,
