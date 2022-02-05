@@ -705,6 +705,9 @@ PAGE JS
 	
 	// Set up gallery on click
 	var galleryZoom = $('#pr_item_gallery');
+	galleryZoom.on('click', '.product_gallery_item', function() {
+		$('.product_img').attr('data-zoom-image', $(this).attr('data-zoom-image'));
+	});
 	galleryZoom.magnificPopup({
 		delegate: 'a',
 		type: 'image',
