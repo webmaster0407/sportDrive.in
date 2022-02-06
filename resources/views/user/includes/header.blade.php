@@ -92,11 +92,13 @@
                             </ul>
                         </div>   
                     </li>
-                    <li><a href="#" class="nav-link"><i class="linearicons-heart"></i><span class="wishlist_count">0</span></a></li>
+                    
                     <li class="dropdown cart_dropdown">
                         <a class="nav-link cart_trigger" href="#" data-toggle="dropdown">
                             <i class="linearicons-bag2"></i>
-                            <span class="cart_count">2</span>
+                            @if($cartCount>0)
+                            <span class="cart_count" id="cart_count">{{$cartCount}}</span>
+                            @endif
                             <span class="amount">
                                 <span class="currency_symbol">$</span>159.00
                             </span>
@@ -116,7 +118,7 @@
                             </ul>
                             <div class="cart_footer">
                                 <p class="cart_total"><strong>Subtotal:</strong> <span class="cart_price"> <span class="price_symbole">$</span></span>159.00</p>
-                                <p class="cart_buttons"><a href="#" class="btn btn-fill-line view-cart">View Cart</a><a href="#" class="btn btn-fill-out checkout">Checkout</a></p>
+                                <p class="cart_buttons"><a href="/cart/view" class="btn btn-fill-line view-cart">View Cart</a><a href="#" class="btn btn-fill-out checkout">Checkout</a></p>
                             </div>
                         </div>
                     </li>

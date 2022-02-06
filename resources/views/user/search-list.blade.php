@@ -13,13 +13,13 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="page-title">
-                    <h1>Product Listing</h1>
+                    <h1>Search Result</h1>
                 </div>
             </div>
             <div class="col-md-6">
                 <ol class="breadcrumb justify-content-md-end">
                     <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Product Listing</li>
+                    <li class="breadcrumb-item active">Search</li>
                 </ol>
             </div>
         </div>

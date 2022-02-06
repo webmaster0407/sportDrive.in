@@ -118,8 +118,11 @@
                             </div>
                             <span class="rating_num">({{$totalRatings}} reviews)</span>
 							@if($product->video_url!=null)
-								<div class="you_tube"><img src="/images/you_tube.png" alt="you tube">
-									<a id="youtube"  data-toggle="modal" data-target="#youtube_video" data-keyboard="true" href="#">Click to watch product video</a>
+								<div class="you_tube">
+									<a id="youtube"  data-toggle="modal" data-target="#youtube_video" data-keyboard="true" href="#">
+										<img src="/images/you_tube.png" alt="you tube">
+										Click to watch product video
+									</a>
 								</div>
 							@endif
                         </div>
@@ -134,25 +137,105 @@
                                 <li><i class="linearicons-bag-dollar"></i> Cash on Delivery available</li>
                             </ul>
                         </div>
-                        <div class="pr_switch_wrap">
-                            <span class="switch_lable">Color</span>
-                            <div class="product_color_switch">
-                                <span class="active" data-color="#87554B"></span>
-                                <span data-color="#333333"></span>
-                                <span data-color="#DA323F"></span>
-                            </div>
-                        </div>
-                        <div class="pr_switch_wrap">
-                        	@if(count($getattributesSize)>=1)
-                        	<input type="hidden" name="selectedSize" id="selectedSize" value="@if(count($getattributesSize)== 1) {{$getattributesSize[0]->AttributeSize}} @endif">
-                            <span class="switch_lable">Size</span>
-                            <div class="product_size_switch">
-                            	@foreach($getattributesSize as $size)
-                            	<span class="sizeselect @if($size->quantity >0)@else outstockSize @endif" data-val="{{$size->AttributeSize}}">{{$size->name}}</span>
-                            	@endforeach
-                            </div>
-	                        @endif
-                        </div>
+
+
+                        <!-- begin add to cart form -->
+						<form action="/product/add-to-cart/{{$product->id}}" name="frmAddCart" id="frmAddCart" method="post">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							@if((count($getattributesSize)>=1) || (count($getattributesColor)>=1))
+
+								@if(count($getattributesColor)>=1)
+		                        <div class="pr_switch_wrap">
+									<input type="hidden" name="selectedColor" id="selectedColor" value="@if(count($getattributesColor)== 1) {{$getattributesColor[0]->AttributeColor}} @endif">
+									<ul class="size-list color">
+									@if(strcasecmp($getattributesColor[0]->name ,"No Color") != 0 )
+									<span class="switch_lable">Color</span>
+									@endif
+		                            <div class="product_size_switch">
+		                            	@foreach($getattributesColor as $color)
+		                            		<?php if(strcasecmp($color->name ,"No Color") != 0 ) {?>
+		                            		    <span class="colorselect" data-val="{{$color->AttributeColor}}">
+														@if($color->colorImage != null)
+															<img src="{{URL::asset('uploads/products/images/'.$color->product_id.'/80x85/'.$color->colorImage)}}
+																	" width="45" height="45" align="center">
+														@endif
+												</span>
+		                                	<?php } ?>
+		                                @endforeach
+		                            </div>
+		                        </div>
+								@endif
+								@if(count($getattributesSize)>=1)
+			                        <div class="pr_switch_wrap">
+			                        	<input type="hidden" name="selectedSize" id="selectedSize" value="@if(count($getattributesSize)== 1) {{$getattributesSize[0]->AttributeSize}} @endif">
+			                            <span class="switch_lable">Size</span>
+			                            <div class="product_size_switch">
+			                            	@foreach($getattributesSize as $size)
+			                                <span class="sizeselect @if($size->quantity >0)@else outstockSize @endif" data-val="{{$size->AttributeSize}}">{{$size->name}}</span>
+			                                @endforeach
+			                            </div>
+			                        </div>
+								@endif
+								<div class="size">
+									<h4 class="blank_h">&nbsp;</h4>
+									@if(($product->size_chart_type =="image" && $product->size_chart_image != null) ||($product->size_chart_type =="desc" && $product->size_chart_description!=null))
+											<div class="size-chart">
+												<a href="#" id="myBtn"  data-toggle="modal" data-target="#size_chart" data-keyboard="true">Size Chart</a>
+											</div>
+
+									@endif
+									<div class="stock-Div">
+										<a href="#" id="stockBtn"  data-toggle="modal" data-target="#stock_model" data-keyboard="true">Stock Availability</a>
+									</div>
+								</div>
+
+							@endif
+							<div class="quantity-Div">
+								<span class="qnty-minus btn-number" data-type="minus" data-field="quantity" id="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+								<span><input class="input-number" type="text" name="quantity" value="1" data-price="{{$finalprice}}" min="1" max= "{{$product->quantity}}"></span>
+								<span class="qnty-add btn-number" data-type="plus" data-field="quantity" id="add"><i class="fa fa-plus" aria-hidden="true"></i></span>
+							</div>
+
+							{{--new chnage by sagar for offers starts--}}
+							@if($offer!=null)
+								<input type="hidden" name="offer_discount" id="offer_discount" value="{{$offer['discount']}}">
+								<input type="hidden" name="offer_quantity" id="offer_quantity" value="{{$offer['quantity']}}">
+								<input type="hidden" name="total_price" id="total_price" value="{{$finalprice}}">
+								<input type="hidden" name="clicked_type" id="clicked_type" value="">
+
+							<div class="chose-second">
+								<h4>{!! $offer->short_description !!}</h4>
+								<span class="any">*Any color</span>
+								<ul>
+									@foreach($productOffers as $productOffer)
+										<li>
+											<a href="/product/details/{{$productOffer->slug}}" target="_blank"><img src="{{URL::asset('uploads/products/images/'.$productOffer->id.'/80x85/'.$productOffer->image)}}" alt="config-image"></a>
+											<div class="quantity-Div" id="price" >
+												<span class="qnty-minus btn-number" data-type="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+												<span><input class="input-number" min="0" max="10" type="text" data-price="{{$productOffer['price']-$productOffer['discount_price']}}" name="otherQuantity[{{$productOffer->id}}][quantity]" value="0"></span>
+												<span class="qnty-add btn-number" data-type="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+											</div>
+										</li>
+								    @endforeach
+								</ul>
+								<h4>{!! $offer->description !!}</h4>
+								<ul class="total ammount" style="display: none">
+									<li><span>{{$product->sku}}</span><span>1</span><span>₹ {{number_format($finalprice,2)}}</span></li>{{--main products sku and price--}}
+									@foreach($productOffers as $productOffer)
+										<li style="display: none" class="other-sku"><span>{{$productOffer->sku}}</span><span>1</span><span>&#8377 {{number_format(($productOffer->price - $productOffer->discount_price),2)}}</span></li>
+									@endforeach
+									<li><span class="off">Less-{{$offer->discount}}%</span><span></span><span></span></li>
+									<li><span>Total</span><span></span><span>₹ {{number_format($finalprice,2)}}</span></li>
+								</ul>
+							</div>
+							@endif
+							{{--new chnage by sagar for offers ends--}}
+
+							<div class="btn-list">
+								<input type="submit" id="addToCartBtn"   name="AddToCart"  class="add-button add-cart" value="ADD TO CART"/>
+							</div>
+						</form>
+						<!--.end form-->
                     </div>
                     <hr />
                     <div class="cart_extra">
@@ -301,6 +384,119 @@
     </div>
 </div>
 <!-- END SECTION SHOP -->
+
+	{{-- size_chart model start here--}}
+	<div class="modal fade" id="size_chart" role="dialog" tabindex='-1'>
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content address-modal">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Size Chart</h4>
+				</div>
+				<div class="modal-body">
+					<div style="text-align: center;" class="sizechartDiv">
+						@if($product->size_chart_type =="image" && $product->size_chart_image != null)
+							<img src="{{ URL::asset('uploads/sizechart/'.$product->id.'/500x500/'.$product->size_chart_image)}}" alt="sizechart"  align="center">
+						@elseif($product->size_chart_type =="desc" && $product->size_chart_description!=null)
+
+							<p>{!! $product->size_chart_description !!}</p>
+						@else
+							<P>Not Present !!</P>
+						@endif
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{-- size_chart model ends here--}}
+
+	{{--change stock_model model start here--}}
+	<div class="modal fade" id="stock_model" role="dialog" tabindex='-1'>
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content address-modal">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Stock Availability</h4>
+				</div>
+				<div class="modal-body">
+					<ul class="address-List stock-modal">
+						<div class="stock-available" style="text-align: center;">
+								@if(count($pConfiguration)>0)
+									<table class="stock-table" cellspacing="1" cellpadding="1">
+										<thead>
+										<tr>
+											<th>Color</th>
+											<th>Size</th>
+											<th>Status</th>
+										</tr>
+										</thead>
+										<tbody>
+										@foreach($pConfiguration as $config)
+											<tr>
+												<td>
+													@if( isset($config->AttributeColor['name'] ))
+														{{$config->AttributeColor['name']}}
+													@else 
+														NA 
+													@endif
+												</td>
+												<td>
+													@if( isset($config->AttributeSize['name']) )
+														{{$config->AttributeSize['name']}}
+													@else 
+														NA 
+													@endif
+												</td>
+												<td>
+													@if($config->quantity >0 )
+														<span style="color:green;"> In stock </span> 
+													@else <span style="color:red;">Out of stock</span> 
+													@endif
+												</td>
+											</tr>
+										@endforeach
+										</tbody>
+									</table>
+								@else
+									<table class="stock-table" cellspacing="1" cellpadding="1">
+										<thead>
+										<tr><th>Product Total Quantity</th></tr>
+										</thead>
+										<tbody>
+										<tr><td>{{$product->quantity}}</td></tr>
+										</tbody>
+									</table>
+								@endif
+						</div>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{--change stock_model model ends here--}}
+
+	@if($product->video_url!=null)
+	{{--youtube model start here--}}
+	<div class="modal fade" id="youtube_video" role="dialog" tabindex='-1'>
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content youtube-modal">
+				<div class="modal-header">
+					<button type="button" id="youtube_button_close" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Watch Youtube Video</h4>
+				</div>
+				<div class="modal-body">
+					<?php $videoData = preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $product->video_url, $match);$youtube_id = $match[1]; ?>
+					<iframe id="youtube_player" width="100%" height="345" src="https://www.youtube.com/embed/{{$youtube_id}}?rel=0" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{--youtube model ends here--}}
+	@endif
 
 </div>
 <!-- END MAIN CONTENT -->

@@ -16,3 +16,19 @@
     cursor: default;
     color: #fff!important;
 }
+
+.color-img {
+	width: 50px !important;
+	height: 50px !important;
+}
+
+.color-img > img {
+	width: 100%;
+	border-radius: 50%;
+	border: 3px solid #ccc;
+}
+
+.colorselect {
+	width: 45px !important;
+	height: 49px !important;
+}
