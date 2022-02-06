@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="form-group col-12">
-                        <input class="btn btn-fill-out form-control" type="submit" name="submitBtn" value="Submit">
+                        <button class="btn btn-fill-out form-control" type="submit">Submit</button>
                     </div>
                     <div class="form-group col-12 register-forgot">
                         <a href="{{  url('/register') }}">Don't have an account?</a>

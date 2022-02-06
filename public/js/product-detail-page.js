@@ -30,6 +30,23 @@ $(document).ready(function(){
     });
 
 
+    $(document).on('change', '.input-number', function() {
+        var minVal = $(this).attr('min');
+        var maxVal = $(this).attr('max');
+        var value = $(this).val();
+        if ( value < minVal ) {
+            alert('Sorry, the minium value was reached.');
+            $(this).val( $(this).attr('min') );
+            return;
+        }
+        if ( value > maxVal ) {
+            alert('Sorry, the maximum value was reached.');
+            $(this).val( $(this).attr('max') );
+            return;
+        }
+    })
+
+
 
     $(document).on("click", 'ul.pagination a', function(event) {
         event.preventDefault();

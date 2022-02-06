@@ -1,7 +1,6 @@
 
 <!-- START MAIN CONTENT -->
 <div class="main_content">
-
     <div  class="row mt-3">
         <div class="col-lg-6 col-md-8 col-sm-12 form-container">
             <div class="successAlert">
@@ -82,7 +81,7 @@
 
 
                     <div class="form-group col-12">
-                        <input class="btn btn-fill-out form-control" type="submit" id="submit" name="submitBtn" value="Submit">
+                        <button class="btn btn-fill-out form-control" type="submit" id="submit">Submit</button>
                     </div>
                     <div class="form-group col-12 register-forgot">
                         <a href="{{  url('/login') }}">Back To Login</a>

@@ -32,3 +32,12 @@
 	width: 45px !important;
 	height: 49px !important;
 }
+
+.product_offer_container {
+	text-align: center;
+}
+
+.product_offer_container .cart-product-quantity {
+	margin-left: auto;
+	margin-right: auto;
+}

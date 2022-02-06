@@ -3,10 +3,6 @@
    
 @endpush
 @section('content')
-
-
-
-
 <!-- START SECTION BREADCRUMB -->
 <div class="breadcrumb_section bg_gray page-title-mini">
     <div class="container"><!-- STRART CONTAINER -->
@@ -190,11 +186,14 @@
 								</div>
 
 							@endif
-							<div class="quantity-Div">
-								<span class="qnty-minus btn-number" data-type="minus" data-field="quantity" id="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-								<span><input class="input-number" type="text" name="quantity" value="1" data-price="{{$finalprice}}" min="1" max= "{{$product->quantity}}"></span>
-								<span class="qnty-add btn-number" data-type="plus" data-field="quantity" id="add"><i class="fa fa-plus" aria-hidden="true"></i></span>
-							</div>
+
+							<div class="cart-product-quantity">
+	                            <div class="quantity">
+	                                <input type="button" value="-" class="minus">
+	                                <input type="text" class="input-number qty" size="4" title="Qty" type="text" name="quantity" value="1" data-price="{{$finalprice}}" min="1" max="{{$product->quantity}}" value="1">
+	                                <input type="button" value="+" class="plus">
+	                            </div>
+	                        </div>	
 
 							{{--new chnage by sagar for offers starts--}}
 							@if($offer!=null)
@@ -203,55 +202,69 @@
 								<input type="hidden" name="total_price" id="total_price" value="{{$finalprice}}">
 								<input type="hidden" name="clicked_type" id="clicked_type" value="">
 
-							<div class="chose-second">
-								<h4>{!! $offer->short_description !!}</h4>
-								<span class="any">*Any color</span>
-								<ul>
-									@foreach($productOffers as $productOffer)
-										<li>
-											<a href="/product/details/{{$productOffer->slug}}" target="_blank"><img src="{{URL::asset('uploads/products/images/'.$productOffer->id.'/80x85/'.$productOffer->image)}}" alt="config-image"></a>
-											<div class="quantity-Div" id="price" >
-												<span class="qnty-minus btn-number" data-type="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-												<span><input class="input-number" min="0" max="10" type="text" data-price="{{$productOffer['price']-$productOffer['discount_price']}}" name="otherQuantity[{{$productOffer->id}}][quantity]" value="0"></span>
-												<span class="qnty-add btn-number" data-type="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+								<div class="chose-second">
+									<h6>{!! $offer->short_description !!}</h6>
+									<span class="any">*Any color</span>
+									<div class="row">
+										@foreach($productOffers as $productOffer)
+											<div class="col-6 product_offer_container">
+												<a href="/product/details/{{$productOffer->slug}}" target="_blank">
+													<img src="{{URL::asset('uploads/products/images/'.$productOffer->id.'/80x85/'.$productOffer->image)}}" alt="config-image">
+												</a>
+												<div class="cart-product-quantity">
+						                            <div class="quantity">
+						                                <input type="button" value="-" class="minus">
+						                                <input type="text"  value="0" min="0" max="10"  title="Qty" class="qty input-number" size="4"  data-price="{{$productOffer['price']-$productOffer['discount_price']}}" name="otherQuantity[{{$productOffer->id}}][quantity]">
+						                                <input type="button" value="+" class="plus">
+						                            </div>
+						                        </div>	
 											</div>
+									    @endforeach
+									</div>
+									<h6>{!! $offer->description !!}</h6>
+									<ul class="total ammount" style="display: none">
+										<li>
+											<span>
+												{{$product->sku}}
+											</span>
+											<span>
+												1
+											</span>
+											<span>
+												₹ {{number_format($finalprice,2)}}
+											</span>
 										</li>
-								    @endforeach
-								</ul>
-								<h4>{!! $offer->description !!}</h4>
-								<ul class="total ammount" style="display: none">
-									<li><span>{{$product->sku}}</span><span>1</span><span>₹ {{number_format($finalprice,2)}}</span></li>{{--main products sku and price--}}
-									@foreach($productOffers as $productOffer)
-										<li style="display: none" class="other-sku"><span>{{$productOffer->sku}}</span><span>1</span><span>&#8377 {{number_format(($productOffer->price - $productOffer->discount_price),2)}}</span></li>
-									@endforeach
-									<li><span class="off">Less-{{$offer->discount}}%</span><span></span><span></span></li>
-									<li><span>Total</span><span></span><span>₹ {{number_format($finalprice,2)}}</span></li>
-								</ul>
-							</div>
+										{{--main products sku and price--}}
+										@foreach($productOffers as $productOffer)
+											<li style="display: none" class="other-sku">
+												<span>{{$productOffer->sku}}</span>
+												<span>1</span>
+												<span>&#8377 {{number_format(($productOffer->price - $productOffer->discount_price),2)}}</span>
+											</li>
+										@endforeach
+										<li>
+											<span class="off">Less-{{$offer->discount}}%</span>
+											<span></span>
+											<span></span>
+										</li>
+										<li>
+											<span>Total</span>
+											<span></span>
+											<span>₹ {{number_format($finalprice,2)}}</span>
+										</li>
+									</ul>
+								</div>
 							@endif
 							{{--new chnage by sagar for offers ends--}}
 
-							<div class="btn-list">
-								<input type="submit" id="addToCartBtn"   name="AddToCart"  class="add-button add-cart" value="ADD TO CART"/>
-							</div>
+	                        <div class="cart_btn">
+	                            <button class="btn btn-fill-out btn-addtocart add-button add-cart" id="addToCartBtn" type="submit"><i class="icon-basket-loaded"></i> Add to cart</button>
+	                        </div>
 						</form>
 						<!--.end form-->
                     </div>
                     <hr />
-                    <div class="cart_extra">
-                        <div class="cart-product-quantity">
-                            <div class="quantity">
-                                <input type="button" value="-" class="minus">
-                                <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
-                                <input type="button" value="+" class="plus">
-                            </div>
-                        </div>
-                        <div class="cart_btn">
-                            <button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Add to cart</button>
-                            <a class="add_compare" href="#"><i class="icon-shuffle"></i></a>
-                            <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -290,7 +303,7 @@
                       	</div>
                       	<div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
                         	<div class="comments">
-                            	<h5 class="product_tab_title">Review for  <span>Blue Dress For Woman</span></h5>
+                            	<h5 class="product_tab_title">Review for  <span>{!! $product->name !!}</span></h5>
 								@if( count($ratingReviews) >0)
 									<div class="toppaging paginationLink">
 										{{ $ratingReviews->links() }}

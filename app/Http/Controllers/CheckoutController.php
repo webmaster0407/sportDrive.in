@@ -44,20 +44,20 @@ class CheckoutController extends Controller
                 }
             }
             /*check the product is_active,is_completed or not #end modified on 20/08/2018*/
-            if(count($cartData)<=0)//if there is no any order
+            if( count($cartData) <= 0)//if there is no any order
                 return redirect("/cart/view");
-            else{
+            else {
                 foreach ($cartData as $cartItem) {
-                    if($cartItem->configuration_id!=null){
+                    if ($cartItem->configuration_id!=null){
                             if($cartItem->configQuantity<$cartItem->cartQuantity)
                              $errorMessageArray[$cartItem->id] = "Uh Oh! Looks like we don't have the quantity you requested for ".$cartItem->name.". We have ".$cartItem->configQuantity." though.";
-                    }else{
-                        if($cartItem->quantity<$cartItem->cartQuantity){
+                    } else {
+                        if ($cartItem->quantity<$cartItem->cartQuantity) {
                             $errorMessageArray[$cartItem->id] = "Uh Oh! Looks like we don't have the quantity you requested for ".$cartItem->name.". We have ".$cartItem->quantity." though.";
                         }
                     }
                 }
-                if($errorMessageArray!=null) // if qty is not available for any product which is added to cart.
+                if ($errorMessageArray != null ) // if qty is not available for any product which is added to cart.
                     return redirect("/cart/view")->with("errorArray",$errorMessageArray);
             }
             $subtotal = $this->getSubtotalFromCartData($cartData);
@@ -74,7 +74,19 @@ class CheckoutController extends Controller
             $user->subTotal = $offersPrices['finalDiscountedAmount']+$offersPrices['totalShippingCharge'];
             $this->StoreNotificationData($user, "checkout");
             /*trigger notification #end*/
-            return view("user.checkout-1")->with(compact("defaultShippingAddress","defaultBillingAddress","allShippingAddresses","allBillingAddresses","subtotal","cartCount","standardCharges","expressCharges","offersPrices"));
+            return view("user.checkout-1")->with(
+                compact(
+                    "defaultShippingAddress",
+                    "defaultBillingAddress",
+                    "allShippingAddresses",
+                    "allBillingAddresses",
+                    "subtotal",
+                    "cartCount",
+                    "standardCharges",
+                    "expressCharges",
+                    "offersPrices"
+                )
+            );
         }catch(\Exception $e){
             $data = [
                 'input_params' => Auth::user(),
@@ -150,7 +162,8 @@ class CheckoutController extends Controller
                 'is_billing' => "N",
                 "route" => "/checkout/1"
             ];
-            return view("user.add-address")->with(compact("subtotal","defaultShippingAddress","defaultBillingAddress","data","standardCharges","expressCharges","cartCount","order"));
+            // return view("user.add-address")->with(compact("subtotal","defaultShippingAddress","defaultBillingAddress","data","standardCharges","expressCharges","cartCount","order"));
+            return view("user.add-address")->with(compact('data'));
         }catch(\Exception $e){
             $data = [
                 'input_params' => $request->all(),

@@ -131,7 +131,7 @@ class CartController extends Controller
                 ];
                 Order::where('id',$order->id)->update($orderData);
             }
-            if(count($cart)<=0){
+            if( !isset($cart) || !is_array($cart) || count($cart) <= 0){
                 $cartData = [
                     'order_id'=>$order->id,
                     'product_id'=>$product_id,

@@ -4,17 +4,30 @@
     padding: 0px !important;
 }
 </style>
+
 @section('content')
-    <div class="content">
-        <div class="breadcrums">
-            <div class="container">
-                <ul>
-                    <li><a href="#">Home / </a></li>
-                    <li><a href="#">My orders</a></li>
-                </ul>
+
+<!-- START SECTION BREADCRUMB -->
+<div class="breadcrumb_section bg_gray page-title-mini">
+    <div class="container"><!-- STRART CONTAINER -->
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="page-title">
+                    <h1>OrderList</h1>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ol class="breadcrumb justify-content-md-end">
+                    <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
+                    <li class="breadcrumb-item active">OrderList</li>
+                </ol>
             </div>
         </div>
-        
+    </div><!-- END CONTAINER-->
+</div>
+<!-- END SECTION BREADCRUMB -->
+
+    <div class="content">        
         <div class="listingContent">
             <div class="container">
 

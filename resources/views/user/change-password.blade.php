@@ -2,29 +2,29 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/auth/reset-pwd.css') }}">
 
+  <!-- START SECTION BREADCRUMB -->
+  <div class="breadcrumb_section bg_gray page-title-mini">
+      <div class="container"><!-- STRART CONTAINER -->
+          <div class="row align-items-center">
+            <div class="col-md-6">
+                  <div class="page-title">
+                  <h1>Change Password</h1>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <ol class="breadcrumb justify-content-md-end">
+                      <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
+                      <li class="breadcrumb-item active">Change Password</li>
+                  </ol>
+              </div>
+          </div>
+      </div><!-- END CONTAINER-->
+  </div>
+  <!-- END SECTION BREADCRUMB -->
+
 <div class="content">
   <div class="listingContent">
     <div class="container">
-
-      <!-- START SECTION BREADCRUMB -->
-      <div class="breadcrumb_section bg_gray page-title-mini">
-          <div class="container"><!-- STRART CONTAINER -->
-              <div class="row align-items-center">
-                <div class="col-md-6">
-                      <div class="page-title">
-                      <h1>Change Password</h1>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <ol class="breadcrumb justify-content-md-end">
-                          <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
-                          <li class="breadcrumb-item active">Change Password</li>
-                      </ol>
-                  </div>
-              </div>
-          </div><!-- END CONTAINER-->
-      </div>
-      <!-- END SECTION BREADCRUMB -->
 
       <!-- START MAIN CONTENT -->
       <div class="main_content">
@@ -90,7 +90,7 @@
                       @endif
 
                       <div class="form-group col-12">
-                          <input class="btn btn-fill-out form-control" type="submit" name="submitBtn" value="Submit">
+                          <button class="btn btn-fill-out form-control" type="submit">Submit</button>
                       </div>
                       <div class="form-group col-12 register-forgot">
                           <a href="{{  url('/login') }}">Login Here</a>
