@@ -198,7 +198,6 @@ $(document).ready(function() {
             async: false,
             data: {"filterPara": filterval,"product_ids":product_ids},
             success: function (data) {
-                console.log(data);
                 if(data['productData']==null){
                     $(".pagination").hide();
                     $("#prod_list").hide();
