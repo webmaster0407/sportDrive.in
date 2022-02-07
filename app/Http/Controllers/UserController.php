@@ -514,7 +514,7 @@ class UserController extends Controller {
 		try {
 			$user = Auth::user();
 			$Address = Address::where('customer_id', '=', $user->id)->get();
-			return view('user.my-addresses')->with(compact("Address", 'data'));
+			return view('user.my-addresses')->with(compact("Address", 'user'));
 		} catch (\Exception $e) {
 			$data = [
 				'input_params' => NULL,

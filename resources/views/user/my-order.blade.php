@@ -130,6 +130,7 @@
                                     <div class="other-info">
                                         @if($cart->color!=null)
                                             <span style="font-style: italic;"><small>Color :  {{$cart->color}}&nbsp;&nbsp; </small></span>
+                                            <br />
                                         @endif
                                         @if($cart->size!=null)
                                             <span style="font-style: italic;"><small>Size :  {{$cart->size}}</small></span>

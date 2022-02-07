@@ -41,37 +41,35 @@
 
 <!-- START MAIN CONTENT -->
 <div class="main_content">
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 col-sm-12 order_review" style="margin: auto;">
-                    <div class="top-fail">
-                        @if($order->payment_custom_message!=null)
-                        <p>{{$order->payment_custom_message}}</p>
-                        @else
-                            <p>Sorry! Your order has been failed. Please ty again.</p>
-                        @endif
-                    </div>
-                    <div class="transaction-details">
-                        <h5>Payment Details</h5>
-                        <div class="row">
-                            <div class="col-md-6" style="margin: auto;">
-                                <div class="order-name">
-                                    <h6>Order ID : </h6>
-                                    <span>{{$userShownOrderId}}</span>
-                                </div>
-                                <div class="order-name">
-                                    <h6>Payment ID:</h6>
-                                    <span>{{$order->payu_payment_id}}</span>
-                                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 col-sm-12 order_review" style="margin: auto;">
+                <div class="top-fail">
+                    @if($order->payment_custom_message!=null)
+                    <p>{{$order->payment_custom_message}}</p>
+                    @else
+                        <p>Sorry! Your order has been failed. Please ty again.</p>
+                    @endif
+                </div>
+                <div class="transaction-details">
+                    <h5>Payment Details</h5>
+                    <div class="row">
+                        <div class="col-md-6" style="margin: auto;">
+                            <div class="order-name">
+                                <h6>Order ID : </h6>
+                                <span>{{$userShownOrderId}}</span>
+                            </div>
+                            <div class="order-name">
+                                <h6>Payment ID:</h6>
+                                <span>{{$order->payu_payment_id}}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="back_home" style="text-align: right;">
-                        <a href="{{ route('index') }}">
-                            <button type="button" class="btn btn-fill-out btn-sm">Back To Home</button>
-                        </a>
-                    </div>
+                </div>
+                <div class="back_home" style="text-align: right;">
+                    <a href="{{ route('index') }}">
+                        <button type="button" class="btn btn-fill-out btn-sm">Back To Home</button>
+                    </a>
                 </div>
             </div>
         </div>
