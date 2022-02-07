@@ -115,27 +115,33 @@ $(document).ready(function () {
         }
     });
 
-    //select shipping Address
-    $('.select_shipping').click(function(){
+
+    $(document).on('click', '.select_shipping', function() {
         var val = $(this).val();
         var divData = $("#all_shipping_"+val).html();
         $("#default_shipping_address").html(divData);
     });
 
-    //select Billing Address
-    $('.select_billing').click(function(){
+
+    $(document).on('click', '.select_billing', function() {
+        if ( $('#same_as_ship').prop('checked') == true ) {
+            return;
+        }
+
         var val = $(this).val();
         var divData = $("#all_billing_"+val).html();
         $("#default_billing_address").html(divData);
     });
 
-    //make billing and shipping address same
-    $('#same_as_ship').click(function(){
+
+
+    $(document).on('click', '#same_as_ship', function() {
+        if ($(this).prop('checked') != true ) {
+            return;
+        }
         var divData = $("#default_shipping_address").html();
         $("#default_billing_address").html(divData);
     });
-
-
     /*checkout methods ends  here*/
 
 

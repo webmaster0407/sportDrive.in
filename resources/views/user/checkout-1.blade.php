@@ -2,8 +2,39 @@
 @section('content')
 
 <style type="text/css">
-    .edit-add {
-        text-align: center;
+    .change-address > button {
+        width: 100%;
+    }
+    .edit-add > a > button {
+        width: 100%;
+        margin-bottom: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #default_shipping_address {
+        margin-top: 45px;
+    }
+    #default_shipping_address p {
+        margin-bottom: 0;
+        margin-top: 5px;
+    }
+
+    #default_billing_address p {
+        margin-bottom: 0;
+        margin-top: 5px;
+    }
+
+    .add-edit-change-btns {
+        margin-bottom: 20px;
+    }
+
+    .address-List > div {
+        color: #333;
+        margin: 5px 0;
+    }
+    .address-List > div  p {
+        margin-top: 5px;
+        margin-bottom: 0;
     }
 </style>
 
@@ -19,7 +50,7 @@
             <div class="col-md-6">
                 <ol class="breadcrumb justify-content-md-end">
                     <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Checkout</li>
+                    <li class="breadcrumb-item active">Checkout - Checkout Information</li>
                 </ol>
             </div>
         </div>
@@ -58,38 +89,41 @@
                         <div class="order_review" style="margin-bottom: 30px;">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h5>Shipping Address</h5>
+                                    <h5 class="addressType">Shipping Address</h5>
+                                    <hr />
                                     <div id="error"></div>
-                                
-                                    
-
                                     @if(isset($allShippingAddresses) && !$allShippingAddresses->isEmpty())
                                         @if( !isset($defaultShippingAddress) )
                                             <?php $defaultShippingAddress = $allShippingAddresses[0]?>
                                         @endif
-
-                                        <input type="hidden" class="form-control" name="shipping_address_id" id="shipping_address_id" value="{{$defaultShippingAddress['id']}}">
-                                        <p><strong>{{$defaultShippingAddress['address_title']}}</strong></p>
-                                        <p><strong>{{$defaultShippingAddress['full_name']}}</strong></p>
-                                        <p>{{$defaultShippingAddress['address_line_1']}}</p>
-                                        <p>{{$defaultShippingAddress['address_line_2']}} {{$defaultShippingAddress['city']}}{{$defaultShippingAddress['state']}} </p>
-                                        <p>{{$defaultShippingAddress['country']}}</p>
-                                        <p>{{$defaultShippingAddress['pin_code']}}</p>
-
-                                        <div class="edit-add">
-                                            <a href="/checkout/edit-address/{{$defaultShippingAddress['id']}}">
-                                                <button type="button" class="btn btn-fill-out btn-sm">Edit</button>
-                                            </a>
-                                            <a href="/checkout/add-shipping-address">
-                                                <button  type="button" class="btn btn-fill-out btn-sm">Add New Address</button>
-                                            </a>
+                                        <div id="default_shipping_address">
+                                            <input type="hidden" class="form-control" name="shipping_address_id" id="shipping_address_id" value="{{$defaultShippingAddress['id']}}">
+                                            <p><strong>{{$defaultShippingAddress['address_title']}}</strong></p>
+                                            <p><strong>{{$defaultShippingAddress['full_name']}}</strong></p>
+                                            <p>{{$defaultShippingAddress['address_line_1']}}</p>
+                                            <p>{{$defaultShippingAddress['address_line_2']}} {{$defaultShippingAddress['city']}}{{$defaultShippingAddress['state']}} </p>
+                                            <p>{{$defaultShippingAddress['country']}}</p>
+                                            <p>{{$defaultShippingAddress['pin_code']}}</p>
                                         </div>
-
-                                        <button  type="button" class="change_new btn btn-fill-line btn-sm" data-toggle="modal" data-target="#shipping_model"  data-keyboard="true">Change Address</button>
+                                        <div class="row add-edit-change-btns">
+                                            <div class="col-12">
+                                                <div class="edit-add">
+                                                    <a href="/checkout/edit-address/{{$defaultShippingAddress['id']}}">
+                                                        <button type="button" class="btn btn-fill-line btn-sm">Edit</button>
+                                                    </a>
+                                                    <a href="/checkout/add-shipping-address">
+                                                        <button  type="button" class="btn btn-fill-line btn-sm">Add New Address</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 change-address">
+                                                <button  type="button" class="change_new btn btn-fill-out btn-sm" data-toggle="modal" data-target="#shipping_model"  data-keyboard="true">Change Address</button>
+                                            </div>
+                                        </div>
                                     @else
-                                        <div class="exist-address">
-                                            <div id="default_shipping_address"></div>
-                                        </div>
+                                        
+                                        <div id="default_shipping_address"></div>
+                                        
                                         <div class="edit-add">
                                             <a href="/checkout/add-shipping-address">
                                                 <button  type="button" class="btn btn-fill-out btn-sm">Add New Address</button>
@@ -98,7 +132,9 @@
                                     @endif
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="chek-form">
+                                    <h5 class="addressType">Billing Address</h5>
+                                    <hr />
+                                    <div class="chek-form same_as_check">
                                         <div class="custome-checkbox">
                                             <input class="form-check-input" type="checkbox" name="same" value="Y" id="same_as_ship">
                                             <label class="form-check-label label_info" for="same_as_ship">
@@ -106,30 +142,37 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <h5>Billing Address</h5>
                                     @if(isset($allBillingAddresses) && !$allBillingAddresses->isEmpty())
                                         @if( !isset($defaultBillingAddress)) 
                                             <?php $defaultBillingAddress = $allBillingAddresses[0]?>
                                         @endif
-
-                                        <input type="hidden"  type="button" name="billing_address_id" id="billing_address_id" value="{{$defaultBillingAddress['id']}}">
-                                        <p><strong>{{$defaultBillingAddress['address_title']}}</strong></p>
-                                        <p><strong>{{$defaultBillingAddress['full_name']}}</strong></p>
-                                        <p>{{$defaultBillingAddress['address_line_1']}}</p>
-                                        <p>{{$defaultBillingAddress['address_line_2']}} {{$defaultBillingAddress['city']}}{{$defaultBillingAddress['state']}} </p>
-                                        <p>{{$defaultBillingAddress['country']}}</p>
-                                        <p>{{$defaultBillingAddress['pin_code']}}</p>
-
-                                        <div class="edit-add">
-                                            <a href="/checkout/edit-address/{{$defaultBillingAddress['id']}}">
-                                                <button  type="button" class="btn btn-fill-out btn-sm">Edit</button>
-                                            </a>
-                                            <a href="/checkout/add-billing-address">
-                                                <button  type="button" class="btn btn-fill-out btn-sm">Add New Address</button>
-                                            </a>
+                                        <div id="default_billing_address">
+                                            <input type="hidden"  type="button" name="billing_address_id" id="billing_address_id" value="{{$defaultBillingAddress['id']}}">
+                                            <p><strong>{{$defaultBillingAddress['address_title']}}</strong></p>
+                                            <p><strong>{{$defaultBillingAddress['full_name']}}</strong></p>
+                                            <p>{{$defaultBillingAddress['address_line_1']}}</p>
+                                            <p>{{$defaultBillingAddress['address_line_2']}} {{$defaultBillingAddress['city']}}{{$defaultBillingAddress['state']}} </p>
+                                            <p>{{$defaultBillingAddress['country']}}</p>
+                                            <p>{{$defaultBillingAddress['pin_code']}}</p>
+                                        </div>
+                                        <div class="row add-edit-change-btns">
+                                            <div class="col-12">
+                                                <div class="edit-add">
+                                                    <a href="/checkout/edit-address/{{$defaultBillingAddress['id']}}">
+                                                        <button  type="button" class="btn btn-fill-line btn-sm">Edit</button>
+                                                    </a>
+                                                    <a href="/checkout/add-billing-address">
+                                                        <button  type="button" class="btn btn-fill-line btn-sm">Add New Address</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 change-address">
+                                                <button  type="button" class="change_new btn btn-fill-out btn-sm" data-toggle="modal" data-target="#billing_model"  data-keyboard="true">Change Address</button>
+                                            </div>
                                         </div>
 
-                                        <button  type="button" class="change_new btn btn-fill-line btn-sm" data-toggle="modal" data-target="#billing_model"  data-keyboard="true">Change Address</button>
+
+
                                     @else
                                         <div id="default_billing_address"></div>
                                         <div class="edit-add">
@@ -168,8 +211,8 @@
                                 </span>
                             </div>
                         </div>
-                        <div style="text-align: center;">
-                            <button class="btn btn-fill-out btn-sm" id="Continue" type="submit">Continue shopping</button>
+                        <div style="text-align: right;">
+                            <button class="btn btn-fill-out btn-sm" id="Continue" type="submit">Continue</button>
                         </div>
                     </form>
 
@@ -223,10 +266,13 @@
                     <h4 class="modal-title">Address List</h4>
                 </div>
                 <div class="modal-body">
-                    <ul class="address-List">
+                    <div class="address-List row">
                         @foreach($allShippingAddresses as $shippingAddress)
-                            <li>
-                                <div class="same-as"><input type="radio" name="same" value="{{$shippingAddress->id}}" class="select_shipping"><span>Select Address</span></div>
+                            <div class="col-md-6">
+                                <div class="same-as">
+                                    <input type="radio" name="same" value="{{$shippingAddress->id}}" id="{{$shippingAddress->id}}" class="select_shipping">
+                                    <label for="{{$shippingAddress->id}}">Select Address</label>
+                                </div>
                                 <div id="all_shipping_{{$shippingAddress->id}}">
                                     <input type="hidden" name="shipping_address_id" id="shipping_address_id" value="{{$shippingAddress['id']}}">
                                     <p><strong>{{$shippingAddress['address_title']}}</strong></p>
@@ -236,11 +282,14 @@
                                     <p>{{$shippingAddress['country']}}</p>
                                     <p>{{$shippingAddress['pin_code']}}</p>
                                 </div>
-                            </li>
+                                <hr />
+                            </div>
                         @endforeach
-                    </ul>
+                    </div>
                 </div>
-                <div class="select-btn"><button type="button" class="btn-success" data-dismiss="modal">Select</button></div>
+                <div class="select-btn" style="text-align: right;">
+                    <button type="button" class="btn btn-fill-line btn-sm" data-dismiss="modal">Select</button>
+                </div>
             </div>
         </div>
     </div>
@@ -257,10 +306,13 @@
                     <h4 class="modal-title">Address List</h4>
                 </div>
                 <div class="modal-body">
-                    <ul class="address-List">
+                    <div class="address-List row">
                         @foreach($allBillingAddresses as $billingAddress)
-                            <li>
-                                <div class="same-as"><input type="radio" name="same" class="select_billing" value="{{$billingAddress->id}}"><span>Select Address</span></div>
+                            <div class="col-md-6">
+                                <div class="same-as">
+                                    <input type="radio" name="same" class="select_billing" id="{{$billingAddress->id}}" value="{{$billingAddress->id}}">
+                                    <label for="{{$billingAddress->id}}">Select Address</label>
+                                </div>
                                 <div id="all_billing_{{$billingAddress->id}}">
                                     <input type="hidden" name="billing_address_id" id="shipping_address_id" value="{{$billingAddress['id']}}">
                                     <p><strong>{{$billingAddress['address_title']}}</strong></p>
@@ -270,11 +322,14 @@
                                     <p>{{$billingAddress['country']}}</p>
                                     <p>{{$billingAddress['pin_code']}}</p>
                                 </div>
-                            </li>
+                                <hr />
+                            </div>
                         @endforeach
-                    </ul>
+                    </div>
                 </div>
-                <div class="select-btn"> <button type="button" class="btn-success" data-dismiss="modal">Select</button></div>
+                <div class="select-btn" style="text-align: right;"> 
+                    <button type="button" class="btn btn-fill-line btn-sm" data-dismiss="modal">Select</button>
+                </div>
             </div>
         </div>
     </div>
