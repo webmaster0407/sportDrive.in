@@ -30,7 +30,7 @@ class SearchController extends Controller
 
     public function autoSuggest(Request $request){
       try{
-		  $data = $request->all();
+      $data = $request->all();
           $searchText = $data['keyword'];
           $user = Auth::user();
           if(!$user){
@@ -67,7 +67,7 @@ class SearchController extends Controller
                           $img ="<img src='/images/no-image-available.png' width='50' height='50'>";
                       $searchData.="<li>";
                       $searchData.="<div class='img-d'>$img</div>";
-                      $searchData.="<div class='name-price'><a href='/product/details/$product->slug'>$product->name</a>";
+                      $searchData.="<div class='name-price'><a href='/product/details/".$product->slug."'>$product->name</a>";
                       $searchData.="<span>₹ $product->price</span></div></li>";
                   }
                   $searchData.="</ul>";
@@ -265,10 +265,7 @@ class SearchController extends Controller
 
                 $productData .= '<div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li class="add-to-cart"><a href="javascript:"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                            <li><a href="javascript:" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                            <li><a href="javascript:" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                            <li><a href="javascript:"><i class="icon-heart"></i></a></li>
+                                            <li class="add-to-cart"><a href="/product/details/'.$product->slug.'"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
                                         </ul>
                                  </div>';
 
@@ -279,7 +276,7 @@ class SearchController extends Controller
                 $productData .= '<div class="product_info">';
 
                     // begin product_title
-                    $productData .= '<h6 class="product_title"><a href="/product/details/$product->slug">'.$product->name.'</a></h6>';
+                    $productData .= '<h6 class="product_title"><a href="/product/details/'.$product->slug.'">'.$product->name.'</a></h6>';
                     // end product_title
 
                     // begin product_price
@@ -338,10 +335,7 @@ class SearchController extends Controller
                     // begin list_product_action_box
                     $productData .= '<div class="list_product_action_box">
                                             <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                <li class="add-to-cart"><a href="/product/details/'.$product->slug.'"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
                                             </ul>
                                         </div>';
                     // end list_product_action_box

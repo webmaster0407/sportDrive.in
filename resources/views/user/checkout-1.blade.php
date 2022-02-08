@@ -35,6 +35,11 @@
     .address-List > div  p {
         margin-top: 5px;
         margin-bottom: 0;
+    } 
+
+    .modal_select_btn {
+        margin-right: 20px;
+        margin-bottom: 20px;
     }
 </style>
 
@@ -262,8 +267,8 @@
             <!-- Modal content-->
             <div class="modal-content address-modal">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Address List</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="address-List row">
@@ -288,7 +293,7 @@
                     </div>
                 </div>
                 <div class="select-btn" style="text-align: right;">
-                    <button type="button" class="btn btn-fill-line btn-sm" data-dismiss="modal">Select</button>
+                    <button type="button" class="btn btn-fill-line btn-sm modal_select_btn" data-dismiss="modal">Select</button>
                 </div>
             </div>
         </div>
@@ -302,8 +307,8 @@
             <!-- Modal content-->
             <div class="modal-content address-modal">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Address List</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="address-List row">
@@ -328,7 +333,7 @@
                     </div>
                 </div>
                 <div class="select-btn" style="text-align: right;"> 
-                    <button type="button" class="btn btn-fill-line btn-sm" data-dismiss="modal">Select</button>
+                    <button type="button" class="btn btn-fill-line btn-sm modal_select_btn" data-dismiss="modal">Select</button>
                 </div>
             </div>
         </div>

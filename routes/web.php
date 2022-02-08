@@ -58,7 +58,7 @@ Route::get('/policies/{slug}', 'UserController@policies');
 
 //category  product related route
 Route::group(['prefix' => 'category'], function () {
-	Route::post('filter-product', 'ProductController@filterProduct');
+	Route::post('filter-product', 'ProductController@filterProduct')->name('filter-product-ajax');
 	Route::get('set-view-type/{view}', 'ProductController@setViewType');
 	Route::get('result-per-page/{result}', 'ProductController@resultPrePage');
 	Route::get('/{slug}', 'ProductController@ListCategoryProduct')->name("ListCategoryProduct");

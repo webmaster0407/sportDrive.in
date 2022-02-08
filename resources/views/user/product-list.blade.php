@@ -93,10 +93,7 @@
                                     @endif
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li class="add-to-cart"><a href="javascript:"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                            <li><a href="javascript:" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                            <li><a href="javascript:" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                            <li><a href="javascript:"><i class="icon-heart"></i></a></li>
+                                            <li class="add-to-cart"><a href="/product/details/{{$product->slug}}"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -134,10 +131,7 @@
 
                                     <div class="list_product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                            <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                            <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                            <li><a href="#"><i class="icon-heart"></i></a></li>
+                                            <li class="add-to-cart"><a href="/product/details/{{$product->slug}}"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -317,8 +311,8 @@
         <!-- Modal content-->
         <div class="modal-content youtube-modal">
             <div class="modal-header">
-                <button type="button" id="youtube_button_close" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Watch Youtube Video</h4>
+                <button type="button" id="youtube_button_close" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 {{----}}
@@ -335,7 +329,11 @@
 
 <script>
 
+    var filter_ajax_url = "{{ route('filter-product-ajax') }}";
+
     $(document).ready(function() {
+
+
 
         $(document).on("click",".playI",function(e){
             var value = $(this).attr("data-vid");

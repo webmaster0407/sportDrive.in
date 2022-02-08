@@ -194,9 +194,12 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             headers: {'X-CSRF-TOKEN': token},
-            url: "/category/filter-product",
+            url: filter_ajax_url,
             async: false,
-            data: {"filterPara": filterval,"product_ids":product_ids},
+            data: {
+                "filterPara": filterval,
+                "product_ids":product_ids
+            },
             success: function (data) {
                 if(data['productData']==null){
                     $(".pagination").hide();

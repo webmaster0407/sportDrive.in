@@ -1,8 +1,17 @@
 @extends('layouts.product-page')
-@push('stylesheets1')
-   
-@endpush
 @section('content')
+<style type="text/css">
+	@media (max-width:  700px) {
+		.slick-prev {
+			left: 0 !important;
+		}
+
+		.slick-next {
+			right: 0 !important;
+		}
+	}
+</style>
+
 <!-- START SECTION BREADCRUMB -->
 <div class="breadcrumb_section bg_gray page-title-mini">
     <div class="container"><!-- STRART CONTAINER -->

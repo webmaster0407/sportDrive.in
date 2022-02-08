@@ -71,3 +71,44 @@ header .product_search_form.radius_input {
 #navCatContent li.dropdown-mega-menu > a.dropdown-toggler:after {
     position: static;
 }
+
+
+/*pagination for all pages*/
+
+.pagination {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.pagination li {
+    color: #000;
+    margin-right: 5px;
+    min-width: 30px;
+    min-height: 20px;
+    text-align: center;
+/*    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);*/
+}
+
+.pagination li:hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5), 0 3px 10px 0 rgba(0, 0, 0, 0.7);
+}
+
+.pagination li a {
+    color: #000;
+}
+
+.pagination .disabled {
+    background-color: #ddd;
+}
+
+.pagination .active  {
+/*    border: 2px solid #ff0000;*/
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5), 0 3px 10px 0 rgba(0, 0, 0, 0.7);
+}
+
+.pagination .disabled::hover, .pagination .active::hover {
+
+} 
+
+
