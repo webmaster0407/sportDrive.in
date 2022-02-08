@@ -193,7 +193,7 @@ $(document).ready(function() {
         var product_ids = $('#product_ids').val();
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': token
+                'X-CSRF-TOKEN': decodeURIComponent(token)
             }
         });
         $.ajax({
