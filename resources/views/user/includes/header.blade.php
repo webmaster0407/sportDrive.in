@@ -72,7 +72,7 @@
                         </div>
                     </form>
                 </div>
-                <ul class="navbar-nav attr-nav align-items-center">
+                <ul class="user-links navbar-nav attr-nav align-items-center">
                     <!-- <li><a href="#" class="nav-link"><i class="linearicons-user"></i></a></li> -->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="linearicons-user"></i></a>

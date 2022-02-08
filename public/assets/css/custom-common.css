@@ -112,3 +112,32 @@ header .product_search_form.radius_input {
 } 
 
 
+/*
+ * Color styles for sportsdrive.in
+ */
+.form-control {
+    color: #ffffff;
+}
+.breadcrumb-item.active {
+    color: #124d8f;
+}
+.size-chart a {
+    color: #da1263;
+}
+.stock-Div a {
+    color: #008e6e;
+}
+.user-links .dropdown-menu.show {
+    transform: translate3d(-175px, 67px, 0px) !important;
+}
+.breadcrumb_section.page-title-mini {
+    padding: 20px 0;
+}
+.section {
+    padding: 50px 0;
+}
+.product_slider .product_img a {
+    display: block;
+    position: relative;
+    z-index: 100;
+}

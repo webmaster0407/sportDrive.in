@@ -43,7 +43,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="col-lg-3 col-md-12 col-sm-12">
                 	<div class="widget">
                         <div class="footer_logo">
-                            <a href="#"><img src="{{ asset('assets/images/logo_dark.png')}}" alt="logo"/></a>
+                            <a href="{{ route('index') }}"><img src="{{ asset('assets/images/logo-footer.png')}}" alt="logo" height="50" /></a>
                         </div>
                         <p class="mb-3"><strong>SPORTIFF INDIA PVT LTD</strong></p>
                         <ul class="contact_info">
