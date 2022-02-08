@@ -77,7 +77,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="linearicons-user"></i></a>
                         <div class="dropdown-menu">
-                            <ul> 
+                            <ul style="list-style-type: none; padding: 0 20px;"> 
                             <?php $user = \Illuminate\Support\Facades\Auth::user(); ?>
                             @if($user==null)
                                 <li><a class="dropdown-item nav-link nav_item" href="/login">Login</a></li>
