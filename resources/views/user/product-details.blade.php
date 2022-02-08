@@ -176,22 +176,24 @@
 			                            <span class="switch_lable">Size</span>
 			                            <div class="product_size_switch">
 			                            	@foreach($getattributesSize as $size)
-			                                <span class="sizeselect @if($size->quantity >0)@else outstockSize @endif" data-val="{{$size->AttributeSize}}">{{$size->name}}</span>
+			                                <span class="sizeselect @if($size->quantity >0)@else outstockSize @endif" data-val="{{$size->AttributeSize}}" style="width: auto !important; min-width: 32px !important; ">{{$size->name}}</span>
 			                                @endforeach
 			                            </div>
 			                        </div>
 								@endif
 								<div class="size">
-									<h4 class="blank_h">&nbsp;</h4>
-									@if(($product->size_chart_type =="image" && $product->size_chart_image != null) ||($product->size_chart_type =="desc" && $product->size_chart_description!=null))
+									<hr />
+									<div style="padding: 0 20px; display: flex; justify-content: space-around;">
+										@if(($product->size_chart_type =="image" && $product->size_chart_image != null) ||($product->size_chart_type =="desc" && $product->size_chart_description!=null))
 											<div class="size-chart">
 												<a href="#" id="myBtn"  data-toggle="modal" data-target="#size_chart" data-keyboard="true">Size Chart</a>
 											</div>
-
-									@endif
-									<div class="stock-Div">
-										<a href="#" id="stockBtn"  data-toggle="modal" data-target="#stock_model" data-keyboard="true">Stock Availability</a>
+										@endif
+										<div class="stock-Div">
+											<a href="#" id="stockBtn"  data-toggle="modal" data-target="#stock_model" data-keyboard="true">Stock Availability</a>
+										</div>
 									</div>
+									<hr />
 								</div>
 
 							@endif
@@ -413,8 +415,8 @@
 			<!-- Modal content-->
 			<div class="modal-content address-modal">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Size Chart</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
 					<div style="text-align: center;" class="sizechartDiv">
@@ -440,60 +442,58 @@
 			<!-- Modal content-->
 			<div class="modal-content address-modal">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Stock Availability</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
-					<ul class="address-List stock-modal">
-						<div class="stock-available" style="text-align: center;">
-								@if(count($pConfiguration)>0)
-									<table class="stock-table" cellspacing="1" cellpadding="1">
-										<thead>
+					<div class="stock-available" style="text-align: center; width: 100%;">
+							@if(count($pConfiguration)>0)
+								<table class="stock-table" cellspacing="1" cellpadding="1" style="width: 100%;">
+									<thead>
+									<tr>
+										<th>Color</th>
+										<th>Size</th>
+										<th>Status</th>
+									</tr>
+									</thead>
+									<tbody>
+									@foreach($pConfiguration as $config)
 										<tr>
-											<th>Color</th>
-											<th>Size</th>
-											<th>Status</th>
+											<td>
+												@if( isset($config->AttributeColor['name'] ))
+													{{$config->AttributeColor['name']}}
+												@else 
+													NA 
+												@endif
+											</td>
+											<td>
+												@if( isset($config->AttributeSize['name']) )
+													{{$config->AttributeSize['name']}}
+												@else 
+													NA 
+												@endif
+											</td>
+											<td>
+												@if($config->quantity >0 )
+													<span style="color:green;"> In stock </span> 
+												@else <span style="color:red;">Out of stock</span> 
+												@endif
+											</td>
 										</tr>
-										</thead>
-										<tbody>
-										@foreach($pConfiguration as $config)
-											<tr>
-												<td>
-													@if( isset($config->AttributeColor['name'] ))
-														{{$config->AttributeColor['name']}}
-													@else 
-														NA 
-													@endif
-												</td>
-												<td>
-													@if( isset($config->AttributeSize['name']) )
-														{{$config->AttributeSize['name']}}
-													@else 
-														NA 
-													@endif
-												</td>
-												<td>
-													@if($config->quantity >0 )
-														<span style="color:green;"> In stock </span> 
-													@else <span style="color:red;">Out of stock</span> 
-													@endif
-												</td>
-											</tr>
-										@endforeach
-										</tbody>
-									</table>
-								@else
-									<table class="stock-table" cellspacing="1" cellpadding="1">
-										<thead>
-										<tr><th>Product Total Quantity</th></tr>
-										</thead>
-										<tbody>
-										<tr><td>{{$product->quantity}}</td></tr>
-										</tbody>
-									</table>
-								@endif
-						</div>
-					</ul>
+									@endforeach
+									</tbody>
+								</table>
+							@else
+								<table class="stock-table" cellspacing="1" cellpadding="1">
+									<thead>
+									<tr><th>Product Total Quantity</th></tr>
+									</thead>
+									<tbody>
+									<tr><td>{{$product->quantity}}</td></tr>
+									</tbody>
+								</table>
+							@endif
+					</div>
 				</div>
 			</div>
 		</div>
@@ -507,8 +507,8 @@
 			<!-- Modal content-->
 			<div class="modal-content youtube-modal">
 				<div class="modal-header">
-					<button type="button" id="youtube_button_close" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Watch Youtube Video</h4>
+					<button type="button" id="youtube_button_close" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
 					<?php $videoData = preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $product->video_url, $match);$youtube_id = $match[1]; ?>

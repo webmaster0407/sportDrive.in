@@ -83,7 +83,7 @@ header .product_search_form.radius_input {
 
 .pagination li {
     color: #000;
-    margin-right: 5px;
+    margin-right: 8px;
     min-width: 30px;
     min-height: 20px;
     text-align: center;
@@ -99,7 +99,7 @@ header .product_search_form.radius_input {
 }
 
 .pagination .disabled {
-    background-color: #ddd;
+    background-color: #eee;
 }
 
 .pagination .active  {

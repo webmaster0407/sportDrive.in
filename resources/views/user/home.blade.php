@@ -9,6 +9,28 @@
         width: 30% !important;
         height: auto;
     }
+
+    .hover_effect1 {
+        position: relative;
+        text-align: center;
+    }
+    .img_over_txt {
+        width: 80%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }   
+
+    .img_over_txt  > h5 { 
+        color: white;
+        font-weight: bold;
+    } 
+    .smallName > span {
+        color: white !important;
+        font-size: 15px;
+        font-weight: bold;
+    }
 </style>
 
 <!-- START SECTION BANNER -->
@@ -67,6 +89,10 @@
                 <div class="sale-banner mb-3 mb-md-4">
                     <a class="hover_effect1" href="/category/{{$topCategory['slug']}}?page=1">
                         <img src="/uploads/categories/426x210/{{$topCategory['image']}}" alt="{{$topCategory['name']}}" style="border-radius: 15px;">
+                        <div class="img_over_txt">
+                            <h5>{{strtoupper($topCategory['name'])}}</h5>
+                            <div class="smallName"><span>{{strtoupper($topCategory['short_description'])}}</span></div>
+                        </div>
                     </a>
                 </div>
             </div>
