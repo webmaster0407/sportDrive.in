@@ -172,8 +172,8 @@
         <div id="frame" class="empty">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=display-width, initial-scale=1.0, maximum-scale=1.0,">
 
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700,600italic,700italic,800,800italic" rel="stylesheet" type="text/css"><style type="text/css">
-                @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700,600italic,700italic,800,800italic);
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700,600italic,700italic,800,800italic" rel="stylesheet" type="text/css">
+            <style type="text/css">
                 html { width: 100%; }
                 body {margin:0; padding:0; width:100%; -webkit-text-size-adjust:none; -ms-text-size-adjust:none;}
                 img { display: block !important; border:0; -ms-interpolation-mode:bicubic;}

@@ -29,7 +29,6 @@
 <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet"> 
-<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"> 
 <!-- Icon Font CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/all.min.css')}}">
 <link rel="stylesheet" href="{{ asset('assets/css/ionicons.min.css')}}">
