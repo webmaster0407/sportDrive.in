@@ -141,3 +141,8 @@ button.form-control {
     position: relative;
     z-index: 100;
 }
+@media only screen and (max-width: 767px) {
+    .shop_container .product_img {
+        text-align: center;
+    }
+}
