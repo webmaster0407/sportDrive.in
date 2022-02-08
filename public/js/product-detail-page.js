@@ -69,6 +69,7 @@ $(document).ready(function(){
         var token = $('input[name=_token]').val();
         $.ajax({
             type: "POST",
+            dataType: "json",
             headers: {'X-CSRF-TOKEN': token},
             url: "/product/rating-review/"+pid,
             data: {"reviewPara": reviewVal,"page":nextPage},

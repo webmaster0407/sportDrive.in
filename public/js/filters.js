@@ -160,6 +160,7 @@ $(document).ready(function() {
             finalUrl = filter_url+"&page="+nextPage;
         $.ajax({
             type: "POST",
+            dataType: "json",
             headers: {'X-CSRF-TOKEN': token},
             url: "/category/filter-product",
             data: {"filterPara": filterval,"product_ids":product_ids,"page":nextPage},
@@ -193,11 +194,12 @@ $(document).ready(function() {
         var product_ids = $('#product_ids').val();
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': decodeURIComponent(token)
+                'X-CSRF-TOKEN': token
             }
         });
         $.ajax({
             type: "POST",
+            dataType: "json",
             url: filter_ajax_url,
             async: false,
             data: {

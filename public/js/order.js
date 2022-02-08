@@ -6,6 +6,7 @@ $(document).ready( function() {
 	  
 	  $.ajax({
 			type: "GET",
+			dataType: "JSON",
 			url: "/order/get-cancel-data/" + order_id,
 			success: function ( data ) {
 				$("#CancelOrder").html(data['cancelorderData']);
@@ -19,6 +20,7 @@ $(document).ready( function() {
 	  var order_id  = $(this).attr('data-val');
 	  $.ajax({
 			type: "GET",
+			dataType: "json",
 			url: "/order/get-return-data/"+order_id,
 			success: function (data) {
 				//console.log(data);

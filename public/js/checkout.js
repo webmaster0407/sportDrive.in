@@ -13,6 +13,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
+            dataType: "json",
             headers: {
                 'X-CSRF-TOKEN': token
             },
@@ -49,7 +50,7 @@ $(document).ready(function () {
         })
     });
 
-    $('.ti-close').click(function (e) {
+    $('.ti-close').on('click', function (e) {
         e.preventDefault();
 
         var token = $('input[id=token]').val();
@@ -57,6 +58,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
+            dataType: "json",
             headers: {'X-CSRF-TOKEN': token},
             url: "/cart/remove",
             data: {"cart_id": cart_id},

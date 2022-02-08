@@ -118,6 +118,7 @@ $(document).ready(function () {
              finalUrl = filter_url+"&page="+nextPage;
         $.ajax({
             type: "POST",
+            dataType: "json",
             headers: {'X-CSRF-TOKEN': token},
             url: "/search/filter-search",
             data: {"filterPara": filterval,"product_ids":product_ids,"page":nextPage},
@@ -152,6 +153,7 @@ $(document).ready(function () {
         var product_ids = $('#product_ids').val();
         $.ajax({
             type: "POST",
+            dataType: "json",
             headers: {'X-CSRF-TOKEN': token},
             url: "/search/filter-search",
             async: false,
