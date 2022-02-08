@@ -191,9 +191,13 @@ $(document).ready(function() {
         filterval = filterval.replace(/,\s*$/, "");
         var token = $('input[id=token]').val();
         var product_ids = $('#product_ids').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': token
+            }
+        });
         $.ajax({
             type: "POST",
-            headers: {'X-CSRF-TOKEN': token},
             url: filter_ajax_url,
             async: false,
             data: {
