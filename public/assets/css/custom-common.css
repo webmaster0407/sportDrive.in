@@ -115,7 +115,7 @@ header .product_search_form.radius_input {
 /*
  * Color styles for sportsdrive.in
  */
-.form-control {
+button.form-control {
     color: #ffffff;
 }
 .breadcrumb-item.active {
