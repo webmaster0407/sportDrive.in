@@ -40,7 +40,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div class="footer_top small_pt pb_20">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="col-lg-5 col-md-5">
                 	<div class="widget">
                         <div class="footer_logo">
                             <a href="{{ route('index') }}"><img src="{{ asset('assets/images/logo-footer.png')}}" alt="logo" height="50" /></a>
@@ -48,22 +48,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="mb-3"><strong>SPORTIFF INDIA PVT LTD</strong></p>
                         <ul class="contact_info">
                             <li>
-                                <i class="ti-email"></i>
-                                <a href="mailto:info@sitename.com">info@sitename.com</a>
+                                {!! $addressData->contact_address !!}
                             </li>
                             <li>
-                                <i class="ti-mobile"></i>
-                                <p>{{$addressData->contact_telephone}}</p>
+                                <p><strong>MOBILE: </strong>{{$addressData->contact_telephone}}</p>
                             </li>
-                            <li>
-                                <i class="ti-location-pin"></i>
-                                <p>Location  {!! $addressData->contact_address !!}</p>
-                            </li>
-
                         </ul>
                     </div>
         		</div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="col-lg-3 col-md-3">
                 	<div class="widget">
                         <h6 class="widget_title">Customer Services</h6>
                         <ul class="widget_links">
@@ -76,7 +69,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="col-lg-4 col-md-4">
                 	<div class="widget">
                         <h6 class="widget_title">About US</h6>
                         <ul class="widget_links">
@@ -84,16 +77,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <li><a href="/terms-and-conditions">Term & Conditions</a></li>
                         </ul>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                	<div class="widget">
-                    	<h6 class="widget_title">Download App</h6>
-                        <ul class="app_list">
-                            <li><a href="#"><img src="{{ asset('assets/images/f1.png')}}" alt="f1"/></a></li>
-                            <li><a href="#"><img src="{{ asset('assets/images/f2.png')}}" alt="f2"/></a></li>
-                        </ul>
-                    </div>
-                	<div class="widget">
+                    <div class="widget">
                     	<h6 class="widget_title">Social</h6>
                         <ul class="social_icons">
                             <li><a href="{{$addressData->facebook_url}}" target="_blank" class="sc_facebook"><i class="ion-social-facebook"></i></a></li>
@@ -102,51 +86,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <li><a href="{{$addressData->youtube_url}}" target="_blank" class="sc_youtube"><i class="ion-social-youtube-outline"></i></a></li>
                             <li><a href="{{$addressData->instagram_url}}" target="_blank" class="sc_instagram"><i class="ion-social-instagram-outline"></i></a></li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="middle_footer">
-    	<div class="container">
-        	<div class="row">
-            	<div class="col-12">
-                	<div class="shopping_info">
-                        <div class="row justify-content-center">
-                            <div class="col-md-4">	
-                                <div class="icon_box icon_box_style2">
-                                    <div class="icon">
-                                        <i class="flaticon-shipped"></i>
-                                    </div>
-                                    <div class="icon_box_content">
-                                    	<h5>Free Delivery</h5>
-                                        <p>Free Delivery for customers</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">	
-                                <div class="icon_box icon_box_style2">
-                                    <div class="icon">
-                                        <i class="flaticon-money-back"></i>
-                                    </div>
-                                    <div class="icon_box_content">
-                                    	<h5>Returns Guarantee</h5>
-                                        <p>30 Days Returns Guarantee</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">	
-                                <div class="icon_box icon_box_style2">
-                                    <div class="icon">
-                                        <i class="flaticon-support"></i>
-                                    </div>
-                                    <div class="icon_box_content">
-                                    	<h5>27/4 Online Support</h5>
-                                        <p>Always be with customers</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

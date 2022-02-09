@@ -146,3 +146,64 @@ button.form-control {
         text-align: center;
     }
 }
+/* Product attribute fix */
+.product-attributes-wrapper {
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    padding: 20px 15px;
+}
+.product-attributes-wrapper .switch_label {
+    color: #124d8f;
+    min-width: 50px;
+}
+.product-attributes-wrapper .size-list,
+.product-attributes-wrapper .pr_switch_wrap {
+    display: flex;
+    align-items: center;
+}
+.product_size_switch span {
+    border-color: #999;
+    background-color: #fff;
+}
+.product_size_switch span.sizeselect {
+    padding: 0 5px;
+    border-radius: 4px;
+    min-width: 90px;
+    margin-bottom: 10px;
+}
+.product_size_switch span.active {
+    border-color: #124d8f;
+    color: #124d8f;
+    background-color: transparent;
+    font-weight: 700;
+}
+.outstockSize {
+    background-color: #999 !important;
+}
+/*
+ * scrolling issue fix
+ */
+body {
+    overflow-x: hidden;
+}
+/* Product modal fix */
+.modal.fade .modal-dialog {
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+}
+@media only screen and (max-width: 767px) {
+    .modal.fade .modal-dialog {
+        transform: translateY(-50%);
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin: 0;
+    }
+}
+/* Footer fix */
+.contact_info p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}

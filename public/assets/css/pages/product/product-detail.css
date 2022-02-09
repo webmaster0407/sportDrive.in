@@ -12,7 +12,6 @@
 
 .outstockSize {
 	pointer-events: none;
-    background: #c3c3c3!important;
     cursor: default;
     color: #fff!important;
 }

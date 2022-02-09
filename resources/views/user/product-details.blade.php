@@ -102,12 +102,14 @@
                             @if($product->price!=$finalprice)
                             	<del> ₹ {{number_format($product->price,2)}} </del>
                             @endif
+							@if($product->offer!=null)
                             <div class="on_sale">
                             	<?php  
                             		$offRate = ($product->price - $finalprice) * 100 / $product->price;
                             	?>
                                 <span>{{ $offRate }}% Off</span>
                             </div>
+							@endif
                         </div>
                         <?php 
                         	$ratingAvg = $ratingAvg * 100 / 5;
@@ -131,30 +133,22 @@
 								</div>
 							@endif
                         </div>
-
+						<div style="clear:both"></div>
                         <div class="pr_desc">
                             <p>{!! nl2br(e($product->short_description)) !!}</p>
                         </div>
-                        <div class="product_sort_info">
-                            <ul>
-                                <li><i class="linearicons-shield-check"></i> 1 Year Warranty</li>
-                                <li><i class="linearicons-sync"></i> 30 Day Return Policy</li>
-                                <li><i class="linearicons-bag-dollar"></i> Cash on Delivery available</li>
-                            </ul>
-                        </div>
-
 
                         <!-- begin add to cart form -->
 						<form action="/product/add-to-cart/{{$product->id}}" name="frmAddCart" id="frmAddCart" method="post">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							@if((count($getattributesSize)>=1) || (count($getattributesColor)>=1))
-
+							<div class="product-attributes-wrapper">
 								@if(count($getattributesColor)>=1)
 		                        <div class="pr_switch_wrap">
 									<input type="hidden" name="selectedColor" id="selectedColor" value="@if(count($getattributesColor)== 1) {{$getattributesColor[0]->AttributeColor}} @endif">
 									<ul class="size-list color">
 									@if(strcasecmp($getattributesColor[0]->name ,"No Color") != 0 )
-									<span class="switch_lable">Color</span>
+									<span class="switch_label">Color</span>
 									@endif
 		                            <div class="product_size_switch">
 		                            	@foreach($getattributesColor as $color)
@@ -173,16 +167,16 @@
 								@if(count($getattributesSize)>=1)
 			                        <div class="pr_switch_wrap">
 			                        	<input type="hidden" name="selectedSize" id="selectedSize" value="@if(count($getattributesSize)== 1) {{$getattributesSize[0]->AttributeSize}} @endif">
-			                            <span class="switch_lable">Size</span>
+			                            <span class="switch_label">Size</span>
 			                            <div class="product_size_switch">
 			                            	@foreach($getattributesSize as $size)
-			                                <span class="sizeselect @if($size->quantity >0)@else outstockSize @endif" data-val="{{$size->AttributeSize}}" style="width: auto !important; min-width: 32px !important; ">{{$size->name}}</span>
+			                                <span class="sizeselect @if($size->quantity >0)@else outstockSize @endif" data-val="{{$size->AttributeSize}}">{{$size->name}}</span>
 			                                @endforeach
 			                            </div>
 			                        </div>
 								@endif
 								<div class="size">
-									<hr />
+									<hr style="margin-bottom: 2px;" />
 									<div style="padding: 0 20px; display: flex; justify-content: space-around;">
 										@if(($product->size_chart_type =="image" && $product->size_chart_image != null) ||($product->size_chart_type =="desc" && $product->size_chart_description!=null))
 											<div class="size-chart">
@@ -193,9 +187,9 @@
 											<a href="#" id="stockBtn"  data-toggle="modal" data-target="#stock_model" data-keyboard="true">Stock Availability</a>
 										</div>
 									</div>
-									<hr />
+									<hr style="margin-top: 2px;" />
 								</div>
-
+							</div>
 							@endif
 
 							<div class="cart-product-quantity">

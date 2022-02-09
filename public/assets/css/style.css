@@ -46,7 +46,7 @@ html, body {
 }
 body {
 	background: #ffffff none repeat scroll 0 0;
-    color: #687188;
+    color: #333;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
@@ -55,12 +55,12 @@ h1,h2,h3,h4,h5,h6 {
 	font-family: 'Roboto';
 }
 p {
-	color:#687188;
+	color:#333;
 	line-height: 28px;
 	margin-bottom: 25px;
 }
 a {
-	color: #292b2c;
+	color: #333;
 	text-decoration: none;
 	-webkit-transition: all 0.3s ease-in-out;
 	transition: all .3s ease-in-out;
@@ -89,7 +89,7 @@ fieldset {
 	padding: 0;
 }
 label {
-	color: #6c757d;
+	color: #333;
 }
 input:focus,
 textarea:focus {
@@ -1635,7 +1635,7 @@ button:focus {
 }
 .social_icons li a {
 	font-size: 18px;
-	color: #687188;
+	color: #333;
 	height: 36px;
 	width: 36px;
 	line-height: 36px;
@@ -1671,7 +1671,7 @@ button:focus {
 	color: #fff;
 }
 .border_social li a {
-	border: 1px solid #687188;
+	border: 1px solid #333;
 	line-height: 35px;
 }
 .social_icons li:last-child a {
@@ -3591,7 +3591,7 @@ h6.blog_title {
 	text-transform: capitalize;
 	display: block;
 	font-size: 14px;
-	color: #687188;
+	color: #333;
 }
 .post_nav {
 	text-transform: capitalize;
@@ -3861,7 +3861,7 @@ footer .widget_title {
 }
 .widget_links li a {
 	font-size: 14px;
-	color: #687188;
+	color: #333;
 }
 .contact_info > li {
 	margin-bottom: 15px;
@@ -3886,7 +3886,7 @@ footer .widget_title {
 }
 .contact_info span + * {
 	overflow: hidden;
-	color: #687188;
+	color: #333;
 	margin: 0;
 	font-size: 14px;
 	line-height: 26px;
@@ -3894,7 +3894,7 @@ footer .widget_title {
 .contact_info i + * {
 	overflow: hidden;
 	font-size: 14px;
-	color: #687188;
+	color: #333;
 	line-height: 26px;
 	margin: 0;
 	vertical-align: middle;
@@ -3929,7 +3929,7 @@ footer .widget_title {
 .footer_link li a {
 	font-size: 14px;
 	padding: 0 5px;
-	color: #687188;
+	color: #333;
 }
 .footer_dark h1, .footer_dark h2, .footer_dark h3, .footer_dark h4, .footer_dark h5, .footer_dark h6, .footer_dark p, .footer_dark a, .footer_dark .widget_links li a, .footer_dark .footer_link li a, .footer_dark .post_content a {
 	color: #fff;
@@ -4219,7 +4219,7 @@ footer .widget_title {
 	margin-bottom: 0;
 }
 .contact_text a {
-	color: #687188;
+	color: #333;
 	line-height: 28px;
 }
 .contact_text a:hover {
@@ -4635,7 +4635,7 @@ footer .widget_title {
 	width: 100%;
 }
 .login_footer a {
-	color: #687188;
+	color: #333;
 }
 .different_login {
 	text-align: center;
@@ -6056,7 +6056,7 @@ select.not_chosen:focus,
 select.form-control.not_chosen, 
 select.form-control.first_null option:first-child, 
 select.not_chosen.form-control:focus {
-	color: #6c757d;
+	color: #333;
 }
 select option {
 	color: #000;
@@ -6146,7 +6146,7 @@ select option {
 .pagination_style1 .page-item a {
 	border: 2px solid #dee2e6;
 	border-radius: 0 !important;
-	color: #687188;
+	color: #333;
 	margin-left: 0px;
 	line-height: 36px;
 }
@@ -6574,7 +6574,7 @@ footer .widget_recent_post .post_img img {
 .custome-checkbox .form-check-label {
 	position: relative;
 	cursor: pointer;
-	color: #687188;
+	color: #333;
 	padding: 0;
 	vertical-align: middle;
 }
