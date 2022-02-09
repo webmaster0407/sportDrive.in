@@ -74,43 +74,52 @@ header .product_search_form.radius_input {
 
 
 /*pagination for all pages*/
-
 .pagination {
     display: flex;
     width: 100%;
     justify-content: center;
 }
-
 .pagination li {
-    color: #000;
-    margin-right: 8px;
-    min-width: 30px;
-    min-height: 20px;
-    text-align: center;
-/*    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);*/
+    margin-right: 10px;
 }
-
-.pagination li:hover {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5), 0 3px 10px 0 rgba(0, 0, 0, 0.7);
+.pagination li:last-child {
+    margin-right: 0;
 }
-
-.pagination li a {
-    color: #000;
+.pagination li > * {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    color: #124d8f;
+    background-color: #fff;
+    position: relative;
+    transition: all .2s;
 }
-
-.pagination .disabled {
-    background-color: #eee;
+.pagination li.active * {
+    background-color: #124d8f;
+    color: #ffffff !important;
 }
-
-.pagination .active  {
-/*    border: 2px solid #ff0000;*/
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5), 0 3px 10px 0 rgba(0, 0, 0, 0.7);
+.pagination li:not(.disabled):hover > * {
+    background-color: #124d8f;
+    color: #ffffff !important;
 }
-
-.pagination .disabled::hover, .pagination .active::hover {
-
-} 
-
+.pagination li:nth-child(1) > *,
+.pagination li:last-child > * {
+    font-family: 'Linearicons' !important;
+    text-indent: -9999px;
+}
+.pagination li:nth-child(1) > *:after {
+    content: "\ec43";
+    display: block;
+    text-indent: 0;
+}
+.pagination li:last-child > *:after {
+    content: "\ec44";
+    display: block;
+    text-indent: 0;
+}
 
 /*
  * Color styles for sportsdrive.in
